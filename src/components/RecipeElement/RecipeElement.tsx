@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import classNames from "classnames";
 
 import fracty from "fracty";
@@ -21,14 +23,30 @@ import styles from "./recipeElement.module.scss";
 
 const RecipeElement = () => {
     const recipeId = useAppSelector(recipeIdSelector);
-
     const { data, isLoading } = useGetSingleRecipeQuery(recipeId);
 
-    if (isLoading) return <h1>Loading...</h1>;
+    const [servingsNumber, setServingsNumber] = useState<number>(0);
+
+    useEffect(() => {
+        if (data) {
+            setServingsNumber(data.data.recipe.servings);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data?.data.recipe.servings]);
 
     if (!data) return <h1>Error</h1>;
+    if (isLoading) return <h1>Loading...</h1>;
 
     const { title, image_url, cooking_time, servings, ingredients, publisher, source_url } = data.data.recipe;
+
+    const increaseServingsHandler = () => {
+        setServingsNumber((servingsNumber) => servingsNumber + 1);
+    };
+
+    const decreaseServingsHandler = () => {
+        if (servingsNumber === 1) return;
+        setServingsNumber((servingsNumber) => servingsNumber - 1);
+    };
 
     return (
         <>
@@ -47,14 +65,14 @@ const RecipeElement = () => {
                 </div>
                 <div className={styles.recipeInfo}>
                     <FaUserAlt />
-                    <span className={styles.recipeInfoData}>{servings}</span>
+                    <span className={styles.recipeInfoData}>{servingsNumber}</span>
                     <span className={styles.recipeInfoText}>servings</span>
 
                     <div className={styles.recipeInfoButtons}>
-                        <button className={styles.btnTiny}>
+                        <button className={styles.btnTiny} onClick={decreaseServingsHandler}>
                             <FaRegMinusSquare />
                         </button>
-                        <button className={styles.btnTiny}>
+                        <button className={styles.btnTiny} onClick={increaseServingsHandler}>
                             <FaRegPlusSquare />
                         </button>
                     </div>
@@ -75,11 +93,13 @@ const RecipeElement = () => {
             <div className={styles.recipeIngredients}>
                 <h2 className={styles.heading2}>Recipe ingredients</h2>
                 <ul className={styles.recipeIngredientList}>
-                    {ingredients.map((ingredient) => (
-                        <li className={styles.recipeIngredient}>
+                    {ingredients.map((ingredient, index) => (
+                        <li key={index} className={styles.recipeIngredient}>
                             <FaCaretRight />
                             <div className={styles.recipeQuantity}>
-                                {ingredient.quantity ? fracty(ingredient.quantity).toString() : ""}
+                                {ingredient.quantity
+                                    ? fracty((ingredient.quantity / servings) * servingsNumber).toString()
+                                    : ""}
                             </div>
                             <div className={styles.recipeDescription}>
                                 <span className={styles.recipeUnit}>{ingredient.unit} </span>

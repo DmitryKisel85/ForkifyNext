@@ -22,8 +22,6 @@ const Results = () => {
 
     const result = data?.data?.recipes;
 
-    console.log(result);
-
     const updateActiveElement = (id: string) => {
         setActiveElement(id);
         dispatch(getRecipeId(id));
