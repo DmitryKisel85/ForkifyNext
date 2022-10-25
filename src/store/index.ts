@@ -3,36 +3,32 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-// import cocktailReducer from "./cocktail/cocktailSlice";
-// import modalWindowReducer from "./modal/modalWindowSlice";
-
 import searchReducer from "./search/searchSlice";
+import recipeReducer from "./recipe/recipeSlice";
 
-// import { cocktailSagas } from "./cocktail/cocktailSaga";
+import { forkifyApi } from "../services/ForkifyServices";
 
 const rootReducer = combineReducers({
+    [forkifyApi.reducerPath]: forkifyApi.reducer,
     searchTerm: searchReducer,
+    recipeId: recipeReducer,
 });
 
-const persistConfig = {
-    key: "root",
-    storage: storage,
-    // blacklist: ["cocktails"],
-};
+// const persistConfig = {
+//     key: "root",
+//     storage: storage,
+//     // blacklist: ["cocktails"],
+// };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+// const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
-    reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: {
-                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-            },
-        }),
+    reducer: rootReducer,
+    // reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(forkifyApi.middleware),
 });
 
-export const persistor = persistStore(store);
+// export const persistor = persistStore(store);
 
 export default store;
 

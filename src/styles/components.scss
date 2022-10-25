@@ -110,6 +110,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transform: translateY(-3px);
 
     &:hover {
         transform: scale(1.07);
@@ -127,8 +128,8 @@
 }
 
 .btnTiny {
-    height: 2rem;
-    width: 2rem;
+    height: 2.25rem;
+    width: 2.25rem;
     border: none;
     background: none;
     cursor: pointer;
@@ -159,7 +160,7 @@
     }
 }
 
-.heading--2 {
+.heading2 {
     font-size: 2rem;
     font-weight: 700;
     color: $color-primary;
