@@ -19,6 +19,10 @@
 .searchBtn {
     font-weight: 600;
     font-family: inherit;
+
+    &:active {
+        transform: translateY(1px);
+    }
 }
 
 .searchField {

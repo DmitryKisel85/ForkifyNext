@@ -7,6 +7,7 @@ import { searchTermSelector } from "../../store/search/searchSelector";
 
 import ResultsPreviewElement from "../ResultsPreviewElement";
 import ErrorMessage from "../ErrorMessage";
+import Spinner from "../Spinner";
 
 import styles from "./results.module.scss";
 import { useState } from "react";
@@ -16,7 +17,7 @@ const Results = () => {
 
     const dispatch = useAppDispatch();
 
-    const { data, isLoading } = useGetMealsQuery(searchTerm);
+    const { data, isLoading, isError } = useGetMealsQuery(searchTerm);
 
     const [activeElement, setActiveElement] = useState<string | null>(null);
 
@@ -27,7 +28,9 @@ const Results = () => {
         dispatch(getRecipeId(id));
     };
 
-    if (isLoading) return <h1>Loading...</h1>;
+    if (!searchTerm) return <div></div>;
+    if (isLoading) return <Spinner />;
+    if (isError) return <ErrorMessage message="Something wrong has happened! Please, refresh the page!" />;
 
     return (
         <>
