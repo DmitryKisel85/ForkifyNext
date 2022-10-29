@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
-
 import classNames from "classnames";
-
 import fracty from "fracty";
-
 import {
     FaClock,
     FaUserAlt,
@@ -20,11 +17,12 @@ import { bookmarksSelector } from "../../store/bookmarks/bookmarksSelector";
 
 import { useGetSingleRecipeQuery } from "../../services/ForkifyServices";
 
-import styles from "./recipeElement.module.scss";
 import {
     pushBookmarkToStore,
     removeBookmarkFromStore,
 } from "../../store/bookmarks/bookmarksSlice";
+
+import styles from "./recipeElement.module.scss";
 
 type RecipeElementProps = {
     id: string;
@@ -59,13 +57,11 @@ const RecipeElement = ({ id }: RecipeElementProps) => {
         source_url,
     } = data.data.recipe;
 
-    console.log(id, data.data.recipe.id);
-
-    const increaseServingsHandler = () => {
+    const handleIncreaseServings = () => {
         setServingsNumber((servingsNumber) => servingsNumber + 1);
     };
 
-    const decreaseServingsHandler = () => {
+    const handleDecreaseServings = () => {
         if (servingsNumber === 1) return;
         setServingsNumber((servingsNumber) => servingsNumber - 1);
     };
@@ -106,13 +102,13 @@ const RecipeElement = ({ id }: RecipeElementProps) => {
                     <div className={styles.recipeInfoButtons}>
                         <button
                             className={styles.btnTiny}
-                            onClick={decreaseServingsHandler}
+                            onClick={handleDecreaseServings}
                         >
                             <FaRegMinusSquare />
                         </button>
                         <button
                             className={styles.btnTiny}
-                            onClick={increaseServingsHandler}
+                            onClick={handleIncreaseServings}
                         >
                             <FaRegPlusSquare />
                         </button>
