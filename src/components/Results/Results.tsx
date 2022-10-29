@@ -30,7 +30,10 @@ const Results = () => {
 
     if (!searchTerm) return <div></div>;
     if (isLoading) return <Spinner />;
-    if (isError) return <ErrorMessage message="Something wrong has happened! Please, refresh the page!" />;
+    if (isError)
+        return (
+            <ErrorMessage message="Something wrong has happened! Please, refresh the page!" />
+        );
 
     return (
         <>

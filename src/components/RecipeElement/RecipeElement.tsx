@@ -14,16 +14,18 @@ import {
     FaArrowRight,
 } from "react-icons/fa";
 
-import { useAppSelector } from "../../hooks/typedHooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/typedHooks";
 import { recipeIdSelector } from "../../store/recipe/recipeSelector";
 
 import { useGetSingleRecipeQuery } from "../../services/ForkifyServices";
 
 import styles from "./recipeElement.module.scss";
+import { pushBookmarkToStore } from "../../store/bookmarks/bookmarksSlice";
 
 const RecipeElement = () => {
     const recipeId = useAppSelector(recipeIdSelector);
     const { data, isLoading } = useGetSingleRecipeQuery(recipeId);
+    const dispatch = useAppDispatch();
 
     const [servingsNumber, setServingsNumber] = useState<number>(0);
 
@@ -37,7 +39,15 @@ const RecipeElement = () => {
     if (!data) return <h1>Error</h1>;
     if (isLoading) return <h1>Loading...</h1>;
 
-    const { title, image_url, cooking_time, servings, ingredients, publisher, source_url } = data.data.recipe;
+    const {
+        title,
+        image_url,
+        cooking_time,
+        servings,
+        ingredients,
+        publisher,
+        source_url,
+    } = data.data.recipe;
 
     const increaseServingsHandler = () => {
         setServingsNumber((servingsNumber) => servingsNumber + 1);
@@ -46,6 +56,10 @@ const RecipeElement = () => {
     const decreaseServingsHandler = () => {
         if (servingsNumber === 1) return;
         setServingsNumber((servingsNumber) => servingsNumber - 1);
+    };
+
+    const handleBookmarks = () => {
+        dispatch(pushBookmarkToStore(data.data.recipe));
     };
 
     return (
@@ -60,19 +74,29 @@ const RecipeElement = () => {
             <div className={styles.recipeDetails}>
                 <div className={styles.recipeInfo}>
                     <FaClock />
-                    <span className={styles.recipeInfoData}>{cooking_time}</span>
+                    <span className={styles.recipeInfoData}>
+                        {cooking_time}
+                    </span>
                     <span className={styles.recipeInfoText}>minutes</span>
                 </div>
                 <div className={styles.recipeInfo}>
                     <FaUserAlt />
-                    <span className={styles.recipeInfoData}>{servingsNumber}</span>
+                    <span className={styles.recipeInfoData}>
+                        {servingsNumber}
+                    </span>
                     <span className={styles.recipeInfoText}>servings</span>
 
                     <div className={styles.recipeInfoButtons}>
-                        <button className={styles.btnTiny} onClick={decreaseServingsHandler}>
+                        <button
+                            className={styles.btnTiny}
+                            onClick={decreaseServingsHandler}
+                        >
                             <FaRegMinusSquare />
                         </button>
-                        <button className={styles.btnTiny} onClick={increaseServingsHandler}>
+                        <button
+                            className={styles.btnTiny}
+                            onClick={increaseServingsHandler}
+                        >
                             <FaRegPlusSquare />
                         </button>
                     </div>
@@ -85,7 +109,10 @@ const RecipeElement = () => {
               <use href="${icons}#icon-user"></use>
             </svg>
           </div> */}
-                <button className={classNames(styles.btnRound, styles.btnBookmark)}>
+                <button
+                    className={classNames(styles.btnRound, styles.btnBookmark)}
+                    onClick={handleBookmarks}
+                >
                     <FaBookmark />
                 </button>
             </div>
@@ -98,11 +125,16 @@ const RecipeElement = () => {
                             <FaCaretRight />
                             <div className={styles.recipeQuantity}>
                                 {ingredient.quantity
-                                    ? fracty((ingredient.quantity / servings) * servingsNumber).toString()
+                                    ? fracty(
+                                          (ingredient.quantity / servings) *
+                                              servingsNumber
+                                      ).toString()
                                     : ""}
                             </div>
                             <div className={styles.recipeDescription}>
-                                <span className={styles.recipeUnit}>{ingredient.unit} </span>
+                                <span className={styles.recipeUnit}>
+                                    {ingredient.unit}{" "}
+                                </span>
                                 {ingredient.description}
                             </div>
                         </li>
@@ -114,8 +146,8 @@ const RecipeElement = () => {
                 <h2 className={styles.heading2}>How to cook it</h2>
                 <p className={styles.recipeDirectionsText}>
                     This recipe was carefully designed and tested by
-                    <span className={styles.recipePublisher}> {publisher}</span>. Please check out directions at their
-                    website.
+                    <span className={styles.recipePublisher}> {publisher}</span>
+                    . Please check out directions at their website.
                 </p>
                 <a
                     className={classNames(styles.btnSmall, styles.recipeBtn)}

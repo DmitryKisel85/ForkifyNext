@@ -6,15 +6,22 @@ import styles from "./resultsPreviewElement.module.scss";
 
 type ResultsPreviewElementProps = {
     meal: PreviewMeal;
-    onClick: () => void;
-    activeElement: string | null;
+    onClick?: () => void;
+    activeElement?: string | null;
 };
 
-const ResultsPreviewElement = ({ meal, onClick, activeElement }: ResultsPreviewElementProps) => {
+const ResultsPreviewElement = ({
+    meal,
+    onClick,
+    activeElement,
+}: ResultsPreviewElementProps) => {
     return (
-        <li className={styles.preview} onClick={onClick}>
+        <li key={meal.id} className={styles.preview} onClick={onClick}>
             <a
-                className={classNames(styles.previewLink, activeElement === meal.id && styles.previewLinkActive)}
+                className={classNames(
+                    styles.previewLink,
+                    activeElement === meal.id && styles.previewLinkActive
+                )}
                 href={`#${meal.id}`}
             >
                 <figure className={styles.previewFig}>
