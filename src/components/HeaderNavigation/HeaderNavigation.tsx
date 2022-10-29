@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaRegEdit, FaBookmark } from "react-icons/fa";
+import { FaRegEdit, FaRegBookmark } from "react-icons/fa";
 
 import Bookmarks from "../Bookmarks";
 
@@ -27,9 +27,8 @@ const HeaderNavigation = () => {
                         className={styles.navBtn}
                         onMouseOver={() => setIsOverButton(true)}
                         onMouseOut={() => setIsOverButton(false)}
-                        // onMouseLeave={() => setBookmarksStateOpen(false)}
                     >
-                        <FaBookmark />
+                        <FaRegBookmark />
                         <span>Bookmarks</span>
                     </button>
                     {(isOverButton || isOverList) && (

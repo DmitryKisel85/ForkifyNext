@@ -1,5 +1,6 @@
-import { useAppSelector } from "../../hooks/typedHooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/typedHooks";
 import { bookmarksSelector } from "../../store/bookmarks/bookmarksSelector";
+import { getRecipeId } from "../../store/recipe/recipeSlice";
 
 import ResultsPreviewElement from "../ResultsPreviewElement";
 
@@ -12,25 +13,34 @@ type BookmarksProps = {
 const Bookmarks = ({ isOverListHandle }: BookmarksProps) => {
     const bookmarks = useAppSelector(bookmarksSelector);
 
+    const dispatch = useAppDispatch();
+
     return (
-        <div
-            className={styles.bookmarks}
-            onMouseEnter={() => isOverListHandle(true)}
-            onMouseLeave={() => isOverListHandle(false)}
-        >
-            <ul className={styles.bookmarksList}>
-                {bookmarks &&
-                    bookmarks.length > 0 &&
-                    bookmarks.map((bookmark) => {
-                        return (
-                            <ResultsPreviewElement
-                                key={bookmark.id}
-                                meal={bookmark}
-                            />
-                        );
-                    })}
-            </ul>
-        </div>
+        <>
+            {bookmarks && bookmarks.length > 0 ? (
+                <div
+                    className={styles.bookmarks}
+                    onMouseEnter={() => isOverListHandle(true)}
+                    onMouseLeave={() => isOverListHandle(false)}
+                >
+                    <ul className={styles.bookmarksList}>
+                        {bookmarks.map((bookmark) => {
+                            return (
+                                <ResultsPreviewElement
+                                    key={bookmark.id}
+                                    meal={bookmark}
+                                    onClick={() =>
+                                        dispatch(getRecipeId(bookmark.id))
+                                    }
+                                />
+                            );
+                        })}
+                    </ul>
+                </div>
+            ) : (
+                ""
+            )}
+        </>
     );
 };
 

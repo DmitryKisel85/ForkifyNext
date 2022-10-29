@@ -17,6 +17,13 @@ const bookmarksSlice = createSlice({
         pushBookmarkToStore: (state, action: PayloadAction<Recipe>) => {
             state.bookmarks.push(action.payload);
         },
+        removeBookmarkFromStore: (state, action) => {
+            console.log(action.payload);
+
+            state.bookmarks = state.bookmarks.filter(
+                (bookmark) => bookmark.id !== action.payload
+            );
+        },
     },
 });
 
@@ -24,4 +31,4 @@ const { actions, reducer } = bookmarksSlice;
 
 export default reducer;
 
-export const { pushBookmarkToStore } = actions;
+export const { pushBookmarkToStore, removeBookmarkFromStore } = actions;

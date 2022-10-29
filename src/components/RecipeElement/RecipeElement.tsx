@@ -9,25 +9,35 @@ import {
     FaUserAlt,
     FaRegPlusSquare,
     FaRegMinusSquare,
+    FaRegBookmark,
     FaBookmark,
     FaCaretRight,
     FaArrowRight,
 } from "react-icons/fa";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/typedHooks";
-import { recipeIdSelector } from "../../store/recipe/recipeSelector";
+import { bookmarksSelector } from "../../store/bookmarks/bookmarksSelector";
 
 import { useGetSingleRecipeQuery } from "../../services/ForkifyServices";
 
 import styles from "./recipeElement.module.scss";
-import { pushBookmarkToStore } from "../../store/bookmarks/bookmarksSlice";
+import {
+    pushBookmarkToStore,
+    removeBookmarkFromStore,
+} from "../../store/bookmarks/bookmarksSlice";
 
-const RecipeElement = () => {
-    const recipeId = useAppSelector(recipeIdSelector);
-    const { data, isLoading } = useGetSingleRecipeQuery(recipeId);
+type RecipeElementProps = {
+    id: string;
+};
+
+const RecipeElement = ({ id }: RecipeElementProps) => {
+    const bookmarks = useAppSelector(bookmarksSelector);
+
+    const { data, isLoading } = useGetSingleRecipeQuery(id);
     const dispatch = useAppDispatch();
 
     const [servingsNumber, setServingsNumber] = useState<number>(0);
+    const [isBookmarked, setIsBookmarked] = useState(false);
 
     useEffect(() => {
         if (data) {
@@ -49,6 +59,8 @@ const RecipeElement = () => {
         source_url,
     } = data.data.recipe;
 
+    console.log(id, data.data.recipe.id);
+
     const increaseServingsHandler = () => {
         setServingsNumber((servingsNumber) => servingsNumber + 1);
     };
@@ -59,7 +71,12 @@ const RecipeElement = () => {
     };
 
     const handleBookmarks = () => {
-        dispatch(pushBookmarkToStore(data.data.recipe));
+        if (bookmarks.some((bookmark) => bookmark.id === id)) {
+            dispatch(removeBookmarkFromStore(id));
+        } else {
+            dispatch(pushBookmarkToStore(data.data.recipe));
+        }
+        setIsBookmarked(!isBookmarked);
     };
 
     return (
@@ -113,7 +130,7 @@ const RecipeElement = () => {
                     className={classNames(styles.btnRound, styles.btnBookmark)}
                     onClick={handleBookmarks}
                 >
-                    <FaBookmark />
+                    {isBookmarked ? <FaBookmark /> : <FaRegBookmark />}
                 </button>
             </div>
 

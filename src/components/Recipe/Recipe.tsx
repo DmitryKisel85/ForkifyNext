@@ -7,9 +7,17 @@ import { useAppSelector } from "../../hooks/typedHooks";
 import styles from "./recipe.module.scss";
 
 const Recipe = () => {
-    const chosenRecipe = useAppSelector(recipeIdSelector);
+    const chosenRecipeId = useAppSelector(recipeIdSelector);
 
-    return <div className={styles.recipe}>{chosenRecipe ? <RecipeElement /> : <NoRecipeStartBlock />}</div>;
+    return (
+        <div className={styles.recipe}>
+            {chosenRecipeId ? (
+                <RecipeElement id={chosenRecipeId} />
+            ) : (
+                <NoRecipeStartBlock />
+            )}
+        </div>
+    );
 };
 
 export default Recipe;
