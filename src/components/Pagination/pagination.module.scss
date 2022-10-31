@@ -26,12 +26,12 @@
             cursor: default;
         }
         &:hover {
-            background-color: $color-primary;
+            background-image: $gradient;
             cursor: pointer;
         }
 
         &Selected {
-            background-color: $color-primary-light;
+            background-image: $gradient;
         }
 
         &Disabled {

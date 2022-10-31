@@ -36,7 +36,7 @@ const Pagination = (props: PaginationProps) => {
 
     let lastPage = paginationRange && paginationRange[paginationRange.length - 1];
     return (
-        <ul className={classnames(styles.paginationContainer, styles.paginationBar)}>
+        <ul className={styles.paginationContainer}>
             {/* Left navigation arrow */}
             <li
                 className={classnames(styles.paginationItem, {
@@ -47,6 +47,7 @@ const Pagination = (props: PaginationProps) => {
                 <div className={classnames(styles.arrow, styles.arrowLeft)} />
             </li>
             {paginationRange &&
+                // eslint-disable-next-line array-callback-return
                 paginationRange.map((pageNumber, index) => {
                     // If the pageItem is a DOT, render the DOTS unicode character
                     if (pageNumber === DOTS) {

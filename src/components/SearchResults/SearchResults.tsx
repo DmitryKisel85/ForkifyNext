@@ -27,7 +27,6 @@ const SearchResults = () => {
 
     const result = data?.data.recipes;
     const lengthTotal = result?.length;
-    // const lengthTotal = data && data?.data.recipes.length;
 
     const updateActiveElement = (id: string) => {
         setActiveElement(id);
@@ -63,39 +62,30 @@ const SearchResults = () => {
             );
         }
     }
-    // if (isError)
-    //     return (
-    //         <RenderMessage
-    //             messageText="Something wrong has happened! Please, try again!"
-    //             messageIcon={<FaRegTimesCircle />}
-    //         />
-    //     );
 
     return (
-        <div>
-            <div className={styles.searchResults}>
-                {data && (
-                    <ul className={styles.results}>
-                        {currentTableData?.map((meal) => {
-                            return (
-                                <ResultsPreviewElement
-                                    key={meal.id}
-                                    meal={meal}
-                                    onClick={() => updateActiveElement(meal.id)}
-                                    activeElement={activeElement}
-                                />
-                            );
-                        })}
-                    </ul>
-                )}
+        <div className={styles.searchResults}>
+            {data && (
+                <ul className={styles.results}>
+                    {currentTableData?.map((meal) => {
+                        return (
+                            <ResultsPreviewElement
+                                key={meal.id}
+                                meal={meal}
+                                onClick={() => updateActiveElement(meal.id)}
+                                activeElement={activeElement}
+                            />
+                        );
+                    })}
+                </ul>
+            )}
 
-                <Pagination
-                    currentPage={currentPage}
-                    totalCount={lengthTotal || 0}
-                    pageSize={PageSize}
-                    onPageChange={(page) => setCurrentPage(page)}
-                />
-            </div>
+            <Pagination
+                currentPage={currentPage}
+                totalCount={lengthTotal || 0}
+                pageSize={PageSize}
+                onPageChange={(page) => setCurrentPage(page)}
+            />
         </div>
     );
 };
