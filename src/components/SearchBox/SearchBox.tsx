@@ -20,6 +20,7 @@ const SearchBox = () => {
 
         if (inputRef.current !== null) {
             dispatch(searchMeal(inputRef.current.value.toLowerCase()));
+            inputRef.current.value = "";
         }
     };
 

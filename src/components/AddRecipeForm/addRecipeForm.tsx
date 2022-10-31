@@ -20,7 +20,7 @@ const AddRecipeForm = () => {
         reset,
         formState: { errors, isValid },
     } = useForm<RecipeFromForm>({
-        mode: "onBlur",
+        mode: "onSubmit",
     });
 
     const [addRecipe, { error, isLoading, isSuccess }] = useAddRecipeMutation();
