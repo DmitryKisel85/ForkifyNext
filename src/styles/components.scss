@@ -41,6 +41,11 @@
         width: 2.25rem;
         fill: currentColor;
     }
+
+    &:disabled {
+        background-image: none;
+        background-color: $color-grey-dark-2;
+    }
 }
 
 .btnSmall {

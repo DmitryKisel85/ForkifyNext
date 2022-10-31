@@ -1,5 +1,7 @@
 import classNames from "classnames";
 
+import AddRecipeForm from "../AddRecipeForm";
+
 import styles from "./addRecipeModal.module.scss";
 
 type ModalProps = {
@@ -18,6 +20,7 @@ const AddRecipeModal = ({ modalShow, handleModalClose }: ModalProps) => {
                 <button className={styles.btnCloseModal} onClick={handleModalClose}>
                     &times;
                 </button>
+                <AddRecipeForm />
             </div>
         </div>
     );

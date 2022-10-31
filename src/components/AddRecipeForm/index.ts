@@ -1,2 +1,2 @@
-import "./addRecipeForm";
-export { default } from "./addRecipeForm";
+import "./AddRecipeForm";
+export { default } from "./AddRecipeForm";

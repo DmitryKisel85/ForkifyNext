@@ -45,11 +45,12 @@ html {
     box-shadow: 0 2rem 6rem 0.5rem rgba($color-grey-dark-1, 0.2);
 
     display: grid;
-    grid-template-rows: 10rem minmax(100rem, auto);
+    grid-template-rows: 10rem minmax(100rem, auto) 3rem;
     grid-template-columns: 1fr 2fr;
     grid-template-areas:
         "head head"
-        "list recipe";
+        "list recipe"
+        "footer footer";
 
     @media only screen and (max-width: $bp-large) {
         max-width: 100%;

@@ -1,17 +1,16 @@
-import Pagination from "../Pagination";
+import { useMemo, useState } from "react";
+import { FaRegTimesCircle } from "react-icons/fa";
 
-import { useGetMealsQuery } from "../../services/ForkifyServices";
+import { useGetRecipesQuery } from "../../services/ForkifyServices";
 import { useAppSelector, useAppDispatch } from "../../hooks/typedHooks";
 
 import { getRecipeId } from "../../store/recipe/recipeSlice";
-
 import { searchTermSelector } from "../../store/search/searchSelector";
 
 import ResultsPreviewElement from "../ResultsPreviewElement";
-import ErrorMessage from "../ErrorMessage";
+import Pagination from "../Pagination";
 import Spinner from "../Spinner";
-
-import { useMemo, useState } from "react";
+import RenderMessage from "../RenderMessage";
 
 import styles from "./searchResults.module.scss";
 
@@ -24,7 +23,7 @@ const SearchResults = () => {
 
     const dispatch = useAppDispatch();
 
-    const { data, isLoading, isError } = useGetMealsQuery(searchTerm);
+    const { data, isLoading, error } = useGetRecipesQuery(searchTerm);
 
     const result = data?.data.recipes;
     const lengthTotal = result?.length;
@@ -43,40 +42,60 @@ const SearchResults = () => {
 
     if (!searchTerm) return <div></div>;
     if (isLoading) return <Spinner />;
-    if (isError)
-        return (
-            <ErrorMessage message="Something wrong has happened! Please, refresh the page!" />
-        );
+    if (error) {
+        if ("status" in error) {
+            // you can access all properties of `FetchBaseQueryError` here
+            const errMsg = "error" in error ? error.error : JSON.stringify(error.data);
+
+            return (
+                <RenderMessage
+                    messageText={`Something goes wrong! ${errMsg}. Please, try again!`}
+                    messageIcon={<FaRegTimesCircle />}
+                />
+            );
+        } else {
+            // you can access all properties of `SerializedError` here
+            return (
+                <RenderMessage
+                    messageText={`Something goes wrong! ${error.message}. Please, try again!`}
+                    messageIcon={<FaRegTimesCircle />}
+                />
+            );
+        }
+    }
+    // if (isError)
+    //     return (
+    //         <RenderMessage
+    //             messageText="Something wrong has happened! Please, try again!"
+    //             messageIcon={<FaRegTimesCircle />}
+    //         />
+    //     );
 
     return (
-        <div className={styles.searchResults}>
-            {data && data.results > 0 ? (
-                <ul className={styles.results}>
-                    {currentTableData?.map((meal) => {
-                        return (
-                            <ResultsPreviewElement
-                                key={meal.id}
-                                meal={meal}
-                                onClick={() => updateActiveElement(meal.id)}
-                                activeElement={activeElement}
-                            />
-                        );
-                    })}
-                </ul>
-            ) : (
-                <ErrorMessage message="We could not find that recipe. Please try another one!" />
-            )}
+        <div>
+            <div className={styles.searchResults}>
+                {data && (
+                    <ul className={styles.results}>
+                        {currentTableData?.map((meal) => {
+                            return (
+                                <ResultsPreviewElement
+                                    key={meal.id}
+                                    meal={meal}
+                                    onClick={() => updateActiveElement(meal.id)}
+                                    activeElement={activeElement}
+                                />
+                            );
+                        })}
+                    </ul>
+                )}
 
-            <Pagination
-                currentPage={currentPage}
-                totalCount={lengthTotal || 0}
-                pageSize={PageSize}
-                onPageChange={(page) => setCurrentPage(page)}
-            />
-
-            <p className={styles.copyright}>
-                &copy; Design by Jonas Schmedtmann.
-            </p>
+                <Pagination
+                    currentPage={currentPage}
+                    totalCount={lengthTotal || 0}
+                    pageSize={PageSize}
+                    onPageChange={(page) => setCurrentPage(page)}
+                />
+            </div>
         </div>
     );
 };

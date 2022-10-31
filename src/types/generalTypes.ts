@@ -21,3 +21,14 @@ export type Recipe = {
     cooking_time: number;
     id: string;
 };
+
+export type RecipeFromForm = {
+    publisher: string;
+    ingredients: string[];
+    source_url: string;
+    image_url: string;
+    title: string;
+    servings: number;
+    cooking_time: number;
+    id: string;
+};

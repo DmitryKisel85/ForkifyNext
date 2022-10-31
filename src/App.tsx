@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import SearchResults from "./components/SearchResults";
 import Recipe from "./components/Recipe";
+import Footer from "./components/Footer";
 
 import styles from "./App.module.scss";
 
@@ -11,6 +12,7 @@ function App() {
                 <Header />
                 <SearchResults />
                 <Recipe />
+                <Footer />
             </div>
         </div>
     );

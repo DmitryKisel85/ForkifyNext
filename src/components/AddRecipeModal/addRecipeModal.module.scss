@@ -13,6 +13,7 @@
     align-items: center;
     opacity: 0;
     pointer-events: none;
+    z-index: 5000;
 }
 
 .modal.active {

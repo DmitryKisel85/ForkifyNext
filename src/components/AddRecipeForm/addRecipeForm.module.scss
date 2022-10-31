@@ -1,16 +1,33 @@
 @import "../../styles/variables.scss";
 @import "../../styles/components.scss";
 
+.formGroup {
+    position: relative;
+    padding-bottom: 2.5rem;
+}
+
+.formInput {
+    display: block;
+    width: 100%;
+}
+
+.formError {
+    position: absolute;
+    bottom: 5%;
+    color: $color-primary;
+    font-size: 1.25rem;
+}
+
 .upload {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem 6rem;
 
     &Column {
-        display: grid;
-        grid-template-columns: 1fr 2.8fr;
-        align-items: center;
-        gap: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        // align-items: center;
+        // gap: 1.5rem;
 
         & label {
             font-size: 1.5rem;
