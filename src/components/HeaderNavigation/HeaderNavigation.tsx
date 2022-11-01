@@ -2,6 +2,8 @@ import { useState } from "react";
 import { FaRegEdit, FaRegBookmark } from "react-icons/fa";
 import AddRecipeModal from "../AddRecipeModal";
 
+import { motion, AnimatePresence } from "framer-motion";
+
 import Bookmarks from "../Bookmarks";
 
 import styles from "./headerNavigation.module.scss";
@@ -42,7 +44,15 @@ const HeaderNavigation = () => {
                     </li>
                 </ul>
             </nav>
-            {modalShow && <AddRecipeModal modalShow={modalShow} handleModalClose={handleModalClose} />}
+            <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
+                {modalShow && (
+                    <AddRecipeModal
+                        modalShow={modalShow}
+                        handleModalClose={handleModalClose}
+                        setModalShow={setModalShow}
+                    />
+                )}
+            </AnimatePresence>
         </>
     );
 };

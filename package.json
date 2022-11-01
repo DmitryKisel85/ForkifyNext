@@ -9,6 +9,7 @@
     "@types/react-dom": "^18.0.6",
     "classnames": "^2.3.2",
     "fracty": "^1.0.11",
+    "framer-motion": "^7.6.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.38.0",
