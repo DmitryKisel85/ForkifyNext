@@ -1,15 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
-import {
-    persistStore,
-    persistReducer,
-    FLUSH,
-    REHYDRATE,
-    PAUSE,
-    PERSIST,
-    PURGE,
-    REGISTER,
-} from "redux-persist";
+import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import searchReducer from "./search/searchSlice";
@@ -25,22 +16,22 @@ const rootReducer = combineReducers({
     bookmarks: bookmarksReducer,
 });
 
-// const persistConfig = {
-//     key: "root",
-//     storage: storage,
-//     // blacklist: ["cocktails"],
-// };
+const persistConfig = {
+    key: "root",
+    storage: storage,
+};
 
-// const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
-    reducer: rootReducer,
-    // reducer: persistedReducer,
+    reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(forkifyApi.middleware),
+        getDefaultMiddleware({
+            serializableCheck: false,
+        }).concat(forkifyApi.middleware),
 });
 
-// export const persistor = persistStore(store);
+export const persistor = persistStore(store);
 
 export default store;
 
