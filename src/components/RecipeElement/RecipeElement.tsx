@@ -32,6 +32,8 @@ type RecipeElementProps = {
 const RecipeElement = ({ id }: RecipeElementProps) => {
     const bookmarks = useAppSelector(bookmarksSelector);
 
+    console.log(id);
+
     const { data, isLoading, error, isSuccess } = useGetSingleRecipeQuery(id);
     const dispatch = useAppDispatch();
 
@@ -44,7 +46,15 @@ const RecipeElement = ({ id }: RecipeElementProps) => {
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [data?.data.recipe.servings]);
+    }, [data?.data.recipe.servings, id]);
+
+    useEffect(() => {
+        if (bookmarks.some((bookmark) => bookmark.id === id)) {
+            setIsBookmarked(true);
+        } else {
+            setIsBookmarked(false);
+        }
+    }, [id, bookmarks]);
 
     if (isLoading) return <Spinner />;
     if (!data)
@@ -90,10 +100,11 @@ const RecipeElement = ({ id }: RecipeElementProps) => {
     const handleBookmarks = () => {
         if (bookmarks.some((bookmark) => bookmark.id === id)) {
             dispatch(removeBookmarkFromStore(id));
+            setIsBookmarked(false);
         } else {
             dispatch(pushBookmarkToStore(data.data.recipe));
+            setIsBookmarked(true);
         }
-        setIsBookmarked(!isBookmarked);
     };
 
     return (
@@ -128,13 +139,6 @@ const RecipeElement = ({ id }: RecipeElementProps) => {
                             </div>
                         </div>
 
-                        {/* <div className="recipe__user-generated ${
-             this._data.key ? '' : 'hidden'
-           }">
-            <svg>
-              <use href="${icons}#icon-user"></use>
-            </svg>
-          </div> */}
                         <button className={classNames(styles.btnRound, styles.btnBookmark)} onClick={handleBookmarks}>
                             {isBookmarked ? <FaBookmark /> : <FaRegBookmark />}
                         </button>
