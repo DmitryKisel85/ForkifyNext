@@ -18,7 +18,7 @@ const AddRecipeForm = () => {
         register,
         handleSubmit,
         reset,
-        formState: { errors, isValid },
+        formState: { errors },
     } = useForm<RecipeFromForm>({
         mode: "onSubmit",
     });
@@ -221,7 +221,7 @@ const AddRecipeForm = () => {
                     />
                 </div>
             </div>
-            <button type="submit" disabled={!isValid} className={classNames(styles.btn, styles.uploadBtn)}>
+            <button type="submit" className={classNames(styles.btn, styles.uploadBtn)}>
                 <FaFileUpload />
                 <span>Upload</span>
             </button>
