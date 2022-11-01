@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaRegEdit, FaRegBookmark } from "react-icons/fa";
 import AddRecipeModal from "../AddRecipeModal";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 import Bookmarks from "../Bookmarks";
 
@@ -15,10 +15,6 @@ const HeaderNavigation = () => {
 
     const isOverListHandle = (boolean: boolean) => {
         setIsOverList(boolean);
-    };
-
-    const handleModalClose = () => {
-        setModalShow(false);
     };
 
     return (
@@ -45,13 +41,7 @@ const HeaderNavigation = () => {
                 </ul>
             </nav>
             <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-                {modalShow && (
-                    <AddRecipeModal
-                        modalShow={modalShow}
-                        handleModalClose={handleModalClose}
-                        setModalShow={setModalShow}
-                    />
-                )}
+                {modalShow && <AddRecipeModal modalShow={modalShow} setModalShow={setModalShow} />}
             </AnimatePresence>
         </>
     );

@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 import AddRecipeForm from "../AddRecipeForm";
 
@@ -6,11 +6,10 @@ import styles from "./addRecipeModal.module.scss";
 
 type ModalProps = {
     modalShow: boolean;
-    handleModalClose: () => void;
     setModalShow: (value: boolean) => void;
 };
 
-const AddRecipeModal = ({ modalShow, handleModalClose, setModalShow }: ModalProps) => {
+const AddRecipeModal = ({ modalShow, setModalShow }: ModalProps) => {
     return (
         <>
             {modalShow && (
@@ -29,7 +28,7 @@ const AddRecipeModal = ({ modalShow, handleModalClose, setModalShow }: ModalProp
                         },
                     }}
                     className={styles.modal}
-                    onClick={handleModalClose}
+                    onClick={() => setModalShow(false)}
                 >
                     <motion.div
                         initial={{ scale: 0 }}
