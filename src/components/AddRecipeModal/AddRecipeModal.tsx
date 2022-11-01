@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { toggleScrollLock } from "../../services/toggleScrollLock";
 
 import AddRecipeForm from "../AddRecipeForm";
 
@@ -10,6 +11,11 @@ type ModalProps = {
 };
 
 const AddRecipeModal = ({ modalShow, setModalShow }: ModalProps) => {
+    const handleCloseModal = () => {
+        setModalShow(false);
+        toggleScrollLock();
+    };
+
     return (
         <>
             {modalShow && (
@@ -28,7 +34,7 @@ const AddRecipeModal = ({ modalShow, setModalShow }: ModalProps) => {
                         },
                     }}
                     className={styles.modal}
-                    onClick={() => setModalShow(false)}
+                    onClick={handleCloseModal}
                 >
                     <motion.div
                         initial={{ scale: 0 }}
@@ -42,7 +48,7 @@ const AddRecipeModal = ({ modalShow, setModalShow }: ModalProps) => {
                         className={styles.modalContent}
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <button className={styles.btnCloseModal} onClick={() => setModalShow(false)}>
+                        <button className={styles.btnCloseModal} onClick={handleCloseModal}>
                             &times;
                         </button>
                         <AddRecipeForm />

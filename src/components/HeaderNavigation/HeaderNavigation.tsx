@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { FaRegEdit, FaRegBookmark } from "react-icons/fa";
-import AddRecipeModal from "../AddRecipeModal";
-
 import { AnimatePresence } from "framer-motion";
+import { FaRegEdit, FaRegBookmark } from "react-icons/fa";
 
+import { toggleScrollLock } from "../../services/toggleScrollLock";
+
+import AddRecipeModal from "../AddRecipeModal";
 import Bookmarks from "../Bookmarks";
 
 import styles from "./headerNavigation.module.scss";
@@ -17,12 +18,17 @@ const HeaderNavigation = () => {
         setIsOverList(boolean);
     };
 
+    const handleShowModal = () => {
+        setModalShow(true);
+        toggleScrollLock();
+    };
+
     return (
         <>
             <nav className={styles.nav}>
                 <ul className={styles.navList}>
                     <li className={styles.navItem}>
-                        <button className={styles.navBtn} onClick={() => setModalShow(true)}>
+                        <button className={styles.navBtn} onClick={handleShowModal}>
                             <FaRegEdit />
                             <span>Add recipe</span>
                         </button>
