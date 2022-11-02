@@ -109,26 +109,6 @@
         transform: translateY(-1px);
     }
 
-    &UserGenerated {
-        background-color: darken($color-grey-light-2, 2%);
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 4rem;
-        width: 4rem;
-        border-radius: 10rem;
-
-        margin-left: auto;
-        margin-right: 1.75rem;
-
-        svg {
-            height: 2.25rem;
-            width: 2.25rem;
-            fill: $color-primary;
-        }
-    }
-
     ///////////
     // INGREDIENTS
     &Ingredients {
@@ -164,15 +144,6 @@
             margin-top: 0.1rem;
         }
     }
-
-    // &Icon {
-    //     height: 2rem;
-    //     width: 2rem;
-    //     fill: $color-primary;
-    //     margin-right: 1.1rem;
-    //     flex: 0 0 auto;
-    //     margin-top: 0.1rem;
-    // }
 
     &Quantity {
         margin-right: 0.5rem;

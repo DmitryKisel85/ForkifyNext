@@ -1,12 +1,10 @@
 import { ChangeEvent, useRef } from "react";
-
 import classNames from "classnames";
+import { BiSearch } from "react-icons/bi";
 
 import { useAppDispatch } from "../../hooks/typedHooks";
 
 import { searchMeal } from "../../store/search/searchSlice";
-
-import { BiSearch } from "react-icons/bi";
 
 import styles from "./searchBox.module.scss";
 

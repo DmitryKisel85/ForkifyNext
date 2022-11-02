@@ -18,7 +18,6 @@
     &Field {
         cursor: pointer;
         padding: 0 4rem;
-
         display: flex;
         align-items: center;
         height: 100%;
@@ -28,10 +27,4 @@
             background-color: $color-grey-light-2;
         }
     }
-
-    // &:hover,
-    // .nav__btn--bookmarks:hover + & {
-    //     visibility: visible;
-    //     opacity: 1;
-    // }
 }

@@ -2,16 +2,16 @@ import classNames from "classnames";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 
-import { useAddRecipeMutation } from "../../services/ForkifyServices";
-
 import { FaFileUpload, FaRegThumbsUp, FaRegTimesCircle } from "react-icons/fa";
+
+import { useAddRecipeMutation } from "../../services/ForkifyServices";
 
 import type { RecipeFromForm } from "../../types/generalTypes";
 
 import Spinner from "../Spinner";
+import RenderMessage from "../RenderMessage";
 
 import styles from "./addRecipeForm.module.scss";
-import RenderMessage from "../RenderMessage";
 
 const AddRecipeForm = () => {
     const {
