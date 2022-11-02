@@ -11,9 +11,9 @@ import type { RecipeFromForm } from "../../types/generalTypes";
 import Spinner from "../Spinner";
 import RenderMessage from "../RenderMessage";
 
-import styles from "./addRecipeForm.module.scss";
+import styles from "./recipeForm.module.scss";
 
-const AddRecipeForm = () => {
+const RecipeForm = () => {
     const {
         register,
         handleSubmit,
@@ -229,4 +229,4 @@ const AddRecipeForm = () => {
     );
 };
 
-export default AddRecipeForm;
+export default RecipeForm;

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { toggleScrollLock } from "../../services/toggleScrollLock";
 
-import AddRecipeForm from "../AddRecipeForm";
+import RecipeForm from "../RecipeForm";
 
 import styles from "./addRecipeModal.module.scss";
 
@@ -51,7 +51,7 @@ const AddRecipeModal = ({ modalShow, setModalShow }: ModalProps) => {
                         <button className={styles.btnCloseModal} onClick={handleCloseModal}>
                             &times;
                         </button>
-                        <AddRecipeForm />
+                        <RecipeForm />
                     </motion.div>
                 </motion.div>
             )}
