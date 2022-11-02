@@ -32,8 +32,6 @@ type RecipeElementProps = {
 const RecipeElement = ({ id }: RecipeElementProps) => {
     const bookmarks = useAppSelector(bookmarksSelector);
 
-    console.log(id);
-
     const { data, isLoading, error, isSuccess } = useGetSingleRecipeQuery(id);
     const dispatch = useAppDispatch();
 
