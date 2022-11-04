@@ -21,6 +21,20 @@
     border-radius: 9px;
     padding: 5rem 6rem;
     box-shadow: 0 4rem 6rem rgba(0, 0, 0, 0.25);
+
+    @media only screen and (max-width: $bp-medium) {
+        width: 75vw;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+        width: 85vw;
+        padding: 3rem 4rem;
+    }
+
+    @media only screen and (max-width: $bp-smallest) {
+        width: 90vw;
+        padding: 2rem 2rem;
+    }
 }
 
 .btnCloseModal {
