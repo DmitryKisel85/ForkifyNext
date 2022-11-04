@@ -26,7 +26,7 @@ const SearchResults = () => {
     console.log(width, height);
 
     // setting pagesize for pagination
-    let PageSize = width < 450 ? 5 : 10;
+    let PageSize = width < 450 ? 6 : 10;
 
     const dispatch = useAppDispatch();
 
