@@ -61,4 +61,14 @@ html {
     @media only screen and (max-width: $bp-standard) {
         grid-template-columns: 1fr 1.25fr;
     }
+
+    @media only screen and (max-width: $bp-smallest) {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "head"
+            "recipe"
+            "list"
+            "footer";
+    }
 }

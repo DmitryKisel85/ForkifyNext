@@ -4,8 +4,24 @@ import Recipe from "./components/Recipe";
 import Footer from "./components/Footer";
 
 import styles from "./App.module.scss";
+import { useEffect } from "react";
+import { useAppDispatch } from "./hooks/typedHooks";
+import { changeViewportSizes } from "./store/viewport/viewportSlice";
 
 function App() {
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        const handleWindowResize = () => {
+            // console.log(window.innerWidth, window.innerHeight);
+
+            dispatch(changeViewportSizes({ width: window.screen.width, height: window.screen.height }));
+        };
+
+        window.addEventListener("resize", handleWindowResize);
+        return () => window.removeEventListener("resize", handleWindowResize);
+    }, [dispatch]);
+
     return (
         <div className={styles.app}>
             <div className={styles.container}>

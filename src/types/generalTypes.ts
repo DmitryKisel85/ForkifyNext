@@ -32,3 +32,8 @@ export type RecipeFromForm = {
     cooking_time: number;
     id: string;
 };
+
+export type ViewportSizes = {
+    width: number;
+    height: number;
+};

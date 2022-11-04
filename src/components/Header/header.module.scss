@@ -6,10 +6,27 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media only screen and (max-width: $bp-smallest) {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-template-areas:
+            "logo search"
+            "button button";
+        padding: 1.25rem;
+        gap: 1.25rem;
+    }
 }
 
 .headerLogo {
     margin-left: 4rem;
     height: 4.6rem;
     display: block;
+
+    @media only screen and (max-width: $bp-smallest) {
+        grid-area: logo;
+        justify-self: start;
+        margin-left: 0;
+        height: 5rem;
+    }
 }

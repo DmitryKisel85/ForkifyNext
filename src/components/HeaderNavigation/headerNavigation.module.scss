@@ -3,16 +3,30 @@
 .nav {
     align-self: stretch;
     margin-right: 2.5rem;
+
+    @media only screen and (max-width: $bp-smallest) {
+        grid-area: button;
+        margin-right: 0;
+    }
 }
 
 .navList {
     list-style: none;
     display: flex;
     height: 100%;
+
+    @media only screen and (max-width: $bp-smallest) {
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+    }
 }
 
 .navItem {
     position: relative;
+    @media only screen and (max-width: $bp-smallest) {
+        padding: 1.25rem;
+    }
 }
 
 .navBtn {
@@ -30,6 +44,10 @@
 
     display: flex;
     align-items: center;
+
+    @media only screen and (max-width: $bp-smallest) {
+        font-size: 1.8rem;
+    }
 
     svg {
         height: 2.4rem;

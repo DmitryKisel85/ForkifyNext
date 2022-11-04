@@ -15,6 +15,10 @@
             height: 25rem;
         }
 
+        @media only screen and (max-width: $bp-smallest) {
+            height: 32rem;
+        }
+
         &::before {
             content: "";
             display: block;
@@ -70,6 +74,11 @@
         @media only screen and (max-width: $bp-standard) {
             padding: 5.5rem 3.5rem 3.5rem 3.5rem;
         }
+
+        @media only screen and (max-width: $bp-smallest) {
+            justify-content: center;
+            padding: 6.5rem 2.25rem 3.5rem 2.25rem;
+        }
     }
 
     &Info {
@@ -77,6 +86,10 @@
         text-transform: uppercase;
         display: flex;
         align-items: center;
+
+        @media only screen and (max-width: $bp-smallest) {
+            font-size: 2rem;
+        }
 
         svg {
             margin-right: 1rem;
@@ -88,6 +101,10 @@
 
         &:not(:last-child) {
             margin-right: 4.5rem;
+
+            @media only screen and (max-width: $bp-smallest) {
+                margin-right: 3rem;
+            }
         }
     }
 
@@ -123,6 +140,11 @@
         @media only screen and (max-width: $bp-standard) {
             padding: 5rem 3.5rem;
         }
+
+        @media only screen and (max-width: $bp-smallest) {
+            font-size: 2.2rem;
+            padding: 3rem 2.5rem;
+        }
     }
 
     &IngredientList {
@@ -130,6 +152,11 @@
         grid-template-columns: 1fr 1fr;
         gap: 2.5rem 3rem;
         list-style: none;
+
+        @media only screen and (max-width: $bp-smallest) {
+            grid-template-columns: 1fr;
+            gap: 2rem 2rem;
+        }
     }
 
     &Ingredient {
@@ -161,6 +188,10 @@
 
         @media only screen and (max-width: $bp-standard) {
             padding: 5rem 3.5rem;
+        }
+
+        @media only screen and (max-width: $bp-smallest) {
+            padding: 3rem 2.5rem;
         }
     }
 

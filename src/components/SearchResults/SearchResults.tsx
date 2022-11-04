@@ -2,10 +2,13 @@ import { useMemo, useState } from "react";
 import { FaRegTimesCircle } from "react-icons/fa";
 
 import { useGetRecipesQuery } from "../../services/ForkifyServices";
+
 import { useAppSelector, useAppDispatch } from "../../hooks/typedHooks";
 
 import { getRecipeId } from "../../store/recipe/recipeSlice";
 import { searchTermSelector } from "../../store/search/searchSelector";
+
+import useViewport from "../../hooks/useViewport";
 
 import ResultsPreviewElement from "../ResultsPreviewElement";
 import Pagination from "../Pagination";
@@ -14,12 +17,16 @@ import RenderMessage from "../RenderMessage";
 
 import styles from "./searchResults.module.scss";
 
-let PageSize = 10;
-
 const SearchResults = () => {
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [activeElement, setActiveElement] = useState<string | null>(null);
     const searchTerm = useAppSelector(searchTermSelector);
+
+    const { width, height } = useViewport();
+    console.log(width, height);
+
+    // setting pagesize for pagination
+    let PageSize = width < 450 ? 5 : 10;
 
     const dispatch = useAppDispatch();
 
@@ -37,7 +44,7 @@ const SearchResults = () => {
         const firstPageIndex = (currentPage - 1) * PageSize;
         const lastPageIndex = firstPageIndex + PageSize;
         return result?.slice(firstPageIndex, lastPageIndex);
-    }, [currentPage, result]);
+    }, [currentPage, result, PageSize]);
 
     if (!searchTerm) return <div></div>;
     if (isLoading) return <Spinner />;

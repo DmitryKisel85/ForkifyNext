@@ -6,6 +6,7 @@ import storage from "redux-persist/lib/storage";
 import searchReducer from "./search/searchSlice";
 import recipeReducer from "./recipe/recipeSlice";
 import bookmarksReducer from "./bookmarks/bookmarksSlice";
+import viewportReducer from "./viewport/viewportSlice";
 
 import { forkifyApi } from "../services/ForkifyServices";
 
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     searchTerm: searchReducer,
     recipeId: recipeReducer,
     bookmarks: bookmarksReducer,
+    viewport: viewportReducer,
 });
 
 const persistConfig = {

@@ -21,6 +21,10 @@
 
     & > *:first-child {
         margin-right: 1rem;
+
+        @media only screen and (max-width: $bp-smallest) {
+            margin-right: 0;
+        }
     }
 }
 
