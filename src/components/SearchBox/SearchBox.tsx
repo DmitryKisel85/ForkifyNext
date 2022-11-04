@@ -16,7 +16,7 @@ const SearchBox = () => {
     const onSubmitHandler = (event: ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        if (inputRef.current !== null) {
+        if (inputRef.current !== null && inputRef.current.value !== "") {
             dispatch(searchMeal(inputRef.current.value.toLowerCase()));
             inputRef.current.value = "";
         }

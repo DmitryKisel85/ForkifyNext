@@ -25,9 +25,12 @@
             background-color: transparent;
             cursor: default;
         }
-        &:hover {
-            background-image: $gradient;
-            cursor: pointer;
+
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                background-image: $gradient;
+                cursor: pointer;
+            }
         }
 
         &Selected {
@@ -42,9 +45,11 @@
                 border-top: 0.12em solid $color-grey-dark-1;
             }
 
-            &:hover {
-                background-color: transparent;
-                cursor: default;
+            @media (hover: hover) and (pointer: fine) {
+                &:hover {
+                    background-color: transparent;
+                    cursor: default;
+                }
             }
         }
     }

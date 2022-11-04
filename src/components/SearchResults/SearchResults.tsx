@@ -22,8 +22,7 @@ const SearchResults = () => {
     const [activeElement, setActiveElement] = useState<string | null>(null);
     const searchTerm = useAppSelector(searchTermSelector);
 
-    const { width, height } = useViewport();
-    console.log(width, height);
+    const { width } = useViewport();
 
     // setting pagesize for pagination
     let PageSize = width < 450 ? 6 : 10;
@@ -46,6 +45,14 @@ const SearchResults = () => {
         return result?.slice(firstPageIndex, lastPageIndex);
     }, [currentPage, result, PageSize]);
 
+    if (data?.results === 0) {
+        return (
+            <RenderMessage
+                messageText={`No results were found. Please, try another query!`}
+                messageIcon={<FaRegTimesCircle />}
+            />
+        );
+    }
     if (!searchTerm) return <div></div>;
     if (isLoading) return <Spinner />;
     if (error) {
@@ -72,7 +79,7 @@ const SearchResults = () => {
 
     return (
         <div className={styles.searchResults}>
-            {data && (
+            {data && data.results > 0 && (
                 <ul className={styles.results}>
                     {currentTableData?.map((meal) => {
                         return (

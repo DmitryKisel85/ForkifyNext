@@ -33,6 +33,12 @@ html {
     line-height: 1.6;
     color: $color-grey-dark-1;
     min-height: calc(100vh - 2 * 4vw);
+
+    @media only screen and (max-width: $bp-small) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .container {
@@ -60,6 +66,10 @@ html {
 
     @media only screen and (max-width: $bp-standard) {
         grid-template-columns: 1fr 1.25fr;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+        min-height: 0;
     }
 
     @media only screen and (max-width: $bp-smallest) {

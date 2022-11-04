@@ -23,8 +23,10 @@
         height: 100%;
         transition: all 0.3s;
 
-        &:hover {
-            background-color: $color-grey-light-2;
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                background-color: $color-grey-light-2;
+            }
         }
     }
 }
