@@ -16,7 +16,7 @@ const HeaderNavigation = () => {
 
     const { lockScroll, unlockScroll } = useScrollLock();
 
-    // блокируем скролл, когда открыто модальное окно
+    // block scroll when modal is opened
     useEffect(() => {
         if (modalShow) {
             lockScroll();
@@ -30,16 +30,12 @@ const HeaderNavigation = () => {
         setIsOverList(boolean);
     };
 
-    const handleShowModal = () => {
-        setModalShow(true);
-    };
-
     return (
         <>
             <nav className={styles.nav}>
                 <ul className={styles.navList}>
                     <li className={styles.navItem}>
-                        <button className={styles.navBtn} onClick={handleShowModal}>
+                        <button className={styles.navBtn} onClick={() => setModalShow(true)}>
                             <FaRegEdit />
                             <span>Add recipe</span>
                         </button>
