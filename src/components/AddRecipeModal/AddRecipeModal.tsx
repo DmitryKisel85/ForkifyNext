@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { toggleScrollLock } from "../../services/toggleScrollLock";
 
 import RecipeForm from "../RecipeForm";
 
@@ -13,7 +12,6 @@ type ModalProps = {
 const AddRecipeModal = ({ modalShow, setModalShow }: ModalProps) => {
     const handleCloseModal = () => {
         setModalShow(false);
-        toggleScrollLock();
     };
 
     return (

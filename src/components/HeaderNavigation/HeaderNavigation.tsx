@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { FaRegEdit, FaRegBookmark } from "react-icons/fa";
 
-import { toggleScrollLock } from "../../services/toggleScrollLock";
+import { useScrollLock } from "../../hooks/useScrollLock";
 
 import AddRecipeModal from "../AddRecipeModal";
 import Bookmarks from "../Bookmarks";
@@ -14,13 +14,24 @@ const HeaderNavigation = () => {
     const [isOverList, setIsOverList] = useState(false);
     const [modalShow, setModalShow] = useState(false);
 
+    const { lockScroll, unlockScroll } = useScrollLock();
+
+    // блокируем скролл, когда открыто модальное окно
+    useEffect(() => {
+        if (modalShow) {
+            lockScroll();
+        } else {
+            unlockScroll();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [modalShow]);
+
     const isOverListHandle = (boolean: boolean) => {
         setIsOverList(boolean);
     };
 
     const handleShowModal = () => {
         setModalShow(true);
-        toggleScrollLock();
     };
 
     return (

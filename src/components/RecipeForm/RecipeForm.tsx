@@ -174,11 +174,7 @@ const RecipeForm = () => {
                         })}
                         placeholder="Format: 'Quantity,Unit,Description'"
                     />
-                    {errors?.ingredients && (
-                        <p className={styles.formError}>
-                            Please, enter at least one ingredient in format 'quantity,unit,description'
-                        </p>
-                    )}
+                    {errors?.ingredients && <p className={styles.formError}>Please, enter at least one ingredient'</p>}
                 </div>
                 <div className={styles.formGroup}>
                     <label>Ingredient 2</label>
