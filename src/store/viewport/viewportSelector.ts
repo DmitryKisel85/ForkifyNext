@@ -1,12 +1,4 @@
-import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "../index";
 
-export const viewportSizesWidth = createSelector(
-    (state: RootState) => state.viewport,
-    (viewport) => viewport.width
-);
-
-export const viewportSizesHeight = createSelector(
-    (state: RootState) => state.viewport,
-    (viewport) => viewport.height
-);
+export const viewportSizesWidth = (state: RootState) => state.viewport.width;
+export const viewportSizesHeight = (state: RootState) => state.viewport.height;

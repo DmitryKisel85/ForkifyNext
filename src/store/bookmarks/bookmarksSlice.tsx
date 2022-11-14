@@ -2,29 +2,25 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import type { Recipe } from "../../types/generalTypes";
 
-type InitialState = {
-    bookmarks: Recipe[];
+export type BookmarksState = {
+	bookmarks: Recipe[];
 };
 
-const initialState: InitialState = {
-    bookmarks: [],
+const initialState: BookmarksState = {
+	bookmarks: [],
 };
 
 const bookmarksSlice = createSlice({
-    name: "bookmarksReducer",
-    initialState,
-    reducers: {
-        pushBookmarkToStore: (state, action: PayloadAction<Recipe>) => {
-            state.bookmarks.push(action.payload);
-        },
-        removeBookmarkFromStore: (state, action) => {
-            console.log(action.payload);
-
-            state.bookmarks = state.bookmarks.filter(
-                (bookmark) => bookmark.id !== action.payload
-            );
-        },
-    },
+	name: "bookmarksReducer",
+	initialState,
+	reducers: {
+		pushBookmarkToStore: (state, action: PayloadAction<Recipe>) => {
+			state.bookmarks.push(action.payload);
+		},
+		removeBookmarkFromStore: (state, action) => {
+			state.bookmarks = state.bookmarks.filter((bookmark) => bookmark.id !== action.payload);
+		},
+	},
 });
 
 const { actions, reducer } = bookmarksSlice;

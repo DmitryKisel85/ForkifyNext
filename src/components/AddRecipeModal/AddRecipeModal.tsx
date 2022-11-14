@@ -1,8 +1,8 @@
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
-import RecipeForm from "../RecipeForm";
+import RecipeForm from '../RecipeForm';
 
-import styles from "./addRecipeModal.module.scss";
+import styles from './addRecipeModal.module.scss';
 
 type ModalProps = {
     modalShow: boolean;
