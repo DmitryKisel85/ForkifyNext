@@ -1,2 +1,1 @@
-import "./AddRecipeModal";
-export { default } from "./AddRecipeModal";
+export * from "./AddRecipeModal";

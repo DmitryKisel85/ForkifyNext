@@ -1,11 +1,13 @@
-import styles from "./footer.module.scss";
+import { memo } from "react";
 
-const Footer = () => {
-    return (
-        <footer className={styles.footer}>
-            <p className={styles.copyright}>&copy; Design by Jonas Schmedtmann.</p>
-        </footer>
-    );
-};
+import s from "./footer.module.scss";
 
-export default Footer;
+const Footer = memo(() => {
+	return (
+		<footer className={s.root}>
+			<p className={s.copyright}>&copy; Design by Jonas Schmedtmann.</p>
+		</footer>
+	);
+});
+
+export { Footer };

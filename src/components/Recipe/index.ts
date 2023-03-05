@@ -1,2 +1,1 @@
-import "./Recipe";
-export { default } from "./Recipe";
+export * from "./Recipe";

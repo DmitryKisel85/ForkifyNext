@@ -1,2 +1,1 @@
-import "./Bookmarks";
-export { default } from "./Bookmarks";
+export * from "./Bookmarks";

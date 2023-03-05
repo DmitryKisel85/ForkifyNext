@@ -1,3 +1,1 @@
-import "./Spinner";
-
-export { default } from "./Spinner";
+export * from "./Spinner";

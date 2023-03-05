@@ -1,17 +1,17 @@
-import styles from "./renderMessage.module.scss";
+import s from "./renderMessage.module.scss";
 
 type RenderMessageProps = {
-    messageText: string;
-    messageIcon: React.ReactNode;
+	messageText: string;
+	messageIcon: React.ReactNode;
 };
 
 const RenderMessage = ({ messageText, messageIcon }: RenderMessageProps) => {
-    return (
-        <div className={styles.message}>
-            <div className={styles.messageIcon}>{messageIcon}</div>
-            <p className={styles.messageText}>{messageText}</p>
-        </div>
-    );
+	return (
+		<div className={s.root}>
+			<div className={s.icon}>{messageIcon}</div>
+			<p className={s.text}>{messageText}</p>
+		</div>
+	);
 };
 
-export default RenderMessage;
+export { RenderMessage };

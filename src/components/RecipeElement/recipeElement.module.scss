@@ -1,208 +1,208 @@
-@import "../../styles/variables.scss";
-@import "../../styles/components.scss";
+@import "styles/variables.scss";
+@import "styles/components.scss";
 
 .recipe {
-    background-color: $color-grey-light-1;
+	background-color: $color-grey-light-1;
 
-    ///////////
-    // FIGURE
-    &Fig {
-        height: 32rem;
-        position: relative;
-        transform-origin: top;
+	///////////
+	// FIGURE
+	&Fig {
+		height: 32rem;
+		position: relative;
+		transform-origin: top;
 
-        @media only screen and (max-width: $bp-standard) {
-            height: 25rem;
-        }
+		@media only screen and (max-width: $bp-standard) {
+			height: 25rem;
+		}
 
-        @media only screen and (max-width: $bp-smallest) {
-            height: 32rem;
-        }
+		@media only screen and (max-width: $bp-smallest) {
+			height: 32rem;
+		}
 
-        &::before {
-            content: "";
-            display: block;
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            background-image: linear-gradient(to right bottom, $color-grad-1, $color-grad-2);
-            opacity: 0.6;
-        }
-    }
+		&::before {
+			content: "";
+			display: block;
+			height: 100%;
+			width: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			background-image: linear-gradient(to right bottom, $color-grad-1, $color-grad-2);
+			opacity: 0.6;
+		}
+	}
 
-    &Img {
-        width: 100%;
-        display: block;
-        height: 100%;
-        object-fit: cover;
-    }
+	&Img {
+		width: 100%;
+		display: block;
+		height: 100%;
+		object-fit: cover;
+	}
 
-    &Title {
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translate(-50%, 20%) skewY(-6deg);
-        color: #fff;
-        font-weight: 700;
-        font-size: 3.25rem;
-        text-transform: uppercase;
-        width: 50%;
-        line-height: 1.95;
-        text-align: center;
+	&Title {
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translate(-50%, 20%) skewY(-6deg);
+		color: #fff;
+		font-weight: 700;
+		font-size: 3.25rem;
+		text-transform: uppercase;
+		width: 50%;
+		line-height: 1.95;
+		text-align: center;
 
-        span {
-            -webkit-box-decoration-break: clone;
-            box-decoration-break: clone;
-            padding: 1.3rem 2rem;
-            background-image: linear-gradient(to right bottom, $color-grad-1, $color-grad-2);
-        }
+		span {
+			-webkit-box-decoration-break: clone;
+			box-decoration-break: clone;
+			padding: 1.3rem 2rem;
+			background-image: linear-gradient(to right bottom, $color-grad-1, $color-grad-2);
+		}
 
-        @media only screen and (max-width: $bp-medium) {
-            width: 70%;
-        }
-    }
+		@media only screen and (max-width: $bp-medium) {
+			width: 70%;
+		}
+	}
 
-    ///////////
-    // DETAILS
-    &Details {
-        display: flex;
-        align-items: center;
-        padding: 7.5rem 8rem 3.5rem 8rem;
+	///////////
+	// DETAILS
+	&Details {
+		display: flex;
+		align-items: center;
+		padding: 7.5rem 8rem 3.5rem 8rem;
 
-        @media only screen and (max-width: $bp-standard) {
-            padding: 5.5rem 3.5rem 3.5rem 3.5rem;
-        }
+		@media only screen and (max-width: $bp-standard) {
+			padding: 5.5rem 3.5rem 3.5rem 3.5rem;
+		}
 
-        @media only screen and (max-width: $bp-smallest) {
-            justify-content: center;
-            padding: 6.5rem 2.25rem 3.5rem 2.25rem;
-        }
-    }
+		@media only screen and (max-width: $bp-smallest) {
+			justify-content: center;
+			padding: 6.5rem 2.25rem 3.5rem 2.25rem;
+		}
+	}
 
-    &Info {
-        font-size: 1.65rem;
-        text-transform: uppercase;
-        display: flex;
-        align-items: center;
+	&Info {
+		font-size: 1.65rem;
+		text-transform: uppercase;
+		display: flex;
+		align-items: center;
 
-        @media only screen and (max-width: $bp-smallest) {
-            font-size: 2rem;
-        }
+		@media only screen and (max-width: $bp-smallest) {
+			font-size: 2rem;
+		}
 
-        svg {
-            margin-right: 1rem;
-            fill: $color-primary;
-            position: relative;
-            transform: translateY(-2px);
-            font-size: 2rem;
-        }
+		svg {
+			margin-right: 1rem;
+			fill: $color-primary;
+			position: relative;
+			transform: translateY(-2px);
+			font-size: 2rem;
+		}
 
-        &:not(:last-child) {
-            margin-right: 4.5rem;
+		&:not(:last-child) {
+			margin-right: 4.5rem;
 
-            @media only screen and (max-width: $bp-smallest) {
-                margin-right: 3rem;
-            }
-        }
-    }
+			@media only screen and (max-width: $bp-smallest) {
+				margin-right: 3rem;
+			}
+		}
+	}
 
-    &InfoIcon {
-        height: 2.35rem;
-        width: 2.35rem;
-        fill: $color-primary;
-        margin-right: 1.15rem;
-    }
+	&InfoIcon {
+		height: 2.35rem;
+		width: 2.35rem;
+		fill: $color-primary;
+		margin-right: 1.15rem;
+	}
 
-    &InfoData {
-        margin-right: 0.5rem;
-        font-weight: 700;
-    }
+	&InfoData {
+		margin-right: 0.5rem;
+		font-weight: 700;
+	}
 
-    &InfoButtons {
-        display: flex;
-        margin-left: 1.6rem;
-        transform: translateY(-1px);
-    }
+	&InfoButtons {
+		display: flex;
+		margin-left: 1.6rem;
+		transform: translateY(-1px);
+	}
 
-    ///////////
-    // INGREDIENTS
-    &Ingredients {
-        padding: 5rem 8rem;
-        font-size: 1.6rem;
-        line-height: 1.4;
-        background-color: $color-grey-light-2;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+	///////////
+	// INGREDIENTS
+	&Ingredients {
+		padding: 5rem 8rem;
+		font-size: 1.6rem;
+		line-height: 1.4;
+		background-color: $color-grey-light-2;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 
-        @media only screen and (max-width: $bp-standard) {
-            padding: 5rem 3.5rem;
-        }
+		@media only screen and (max-width: $bp-standard) {
+			padding: 5rem 3.5rem;
+		}
 
-        @media only screen and (max-width: $bp-smallest) {
-            font-size: 2.2rem;
-            padding: 3rem 2.5rem;
-        }
-    }
+		@media only screen and (max-width: $bp-smallest) {
+			font-size: 2.2rem;
+			padding: 3rem 2.5rem;
+		}
+	}
 
-    &IngredientList {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2.5rem 3rem;
-        list-style: none;
+	&IngredientList {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 2.5rem 3rem;
+		list-style: none;
 
-        @media only screen and (max-width: $bp-smallest) {
-            grid-template-columns: 1fr;
-            gap: 2rem 2rem;
-        }
-    }
+		@media only screen and (max-width: $bp-smallest) {
+			grid-template-columns: 1fr;
+			gap: 2rem 2rem;
+		}
+	}
 
-    &Ingredient {
-        display: flex;
+	&Ingredient {
+		display: flex;
 
-        svg {
-            height: 2rem;
-            width: 2rem;
-            fill: $color-primary;
-            margin-right: 1.1rem;
-            flex: 0 0 auto;
-            margin-top: 0.1rem;
-        }
-    }
+		svg {
+			height: 2rem;
+			width: 2rem;
+			fill: $color-primary;
+			margin-right: 1.1rem;
+			flex: 0 0 auto;
+			margin-top: 0.1rem;
+		}
+	}
 
-    &Quantity {
-        margin-right: 0.5rem;
-        flex: 0 0 auto;
-    }
+	&Quantity {
+		margin-right: 0.5rem;
+		flex: 0 0 auto;
+	}
 
-    ///////////
-    // DIRECTIONS
-    &Directions {
-        padding: 5rem 10rem;
-        padding-bottom: 5rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+	///////////
+	// DIRECTIONS
+	&Directions {
+		padding: 5rem 10rem;
+		padding-bottom: 5rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 
-        @media only screen and (max-width: $bp-standard) {
-            padding: 5rem 3.5rem;
-        }
+		@media only screen and (max-width: $bp-standard) {
+			padding: 5rem 3.5rem;
+		}
 
-        @media only screen and (max-width: $bp-smallest) {
-            padding: 3rem 2.5rem;
-        }
-    }
+		@media only screen and (max-width: $bp-smallest) {
+			padding: 3rem 2.5rem;
+		}
+	}
 
-    &DirectionsText {
-        font-size: 1.7rem;
-        text-align: center;
-        margin-bottom: 3.5rem;
-        color: $color-grey-dark-2;
-    }
+	&DirectionsText {
+		font-size: 1.7rem;
+		text-align: center;
+		margin-bottom: 3.5rem;
+		color: $color-grey-dark-2;
+	}
 
-    &Publisher {
-        font-weight: 700;
-    }
+	&Publisher {
+		font-weight: 700;
+	}
 }

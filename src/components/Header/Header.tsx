@@ -1,18 +1,18 @@
-import logo from "../../assets/logo.png";
+import logo from "assets/logo.png";
 
-import SearchBox from "../SearchBox";
-import HeaderNavigation from "../HeaderNavigation";
+import { SearchBox } from "components/Header/SearchBox";
+import { HeaderNavigation } from "components/Header/HeaderNavigation";
 
-import styles from "./header.module.scss";
+import s from "./header.module.scss";
 
 const Header = () => {
-    return (
-        <header className={styles.header}>
-            <img src={logo} alt="Logo" className={styles.headerLogo} />
-            <SearchBox />
-            <HeaderNavigation />
-        </header>
-    );
+	return (
+		<header className={s.root}>
+			<img src={logo} alt='Logo' className={s.logo} />
+			<SearchBox />
+			<HeaderNavigation />
+		</header>
+	);
 };
 
-export default Header;
+export { Header };

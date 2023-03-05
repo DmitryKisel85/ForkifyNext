@@ -1,84 +1,84 @@
 @import "./styles/variables.scss";
 
 * {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: inherit;
+	box-sizing: inherit;
 }
 
 html {
-    box-sizing: border-box;
-    font-size: 62.5%;
-    background-image: $gradient;
-    background-size: cover;
-    background-repeat: no-repeat;
+	box-sizing: border-box;
+	font-size: 62.5%;
+	background-image: $gradient;
+	background-size: cover;
+	background-repeat: no-repeat;
 
-    @media only screen and (max-width: $bp-medium) {
-        font-size: 50%;
-    }
+	@media only screen and (max-width: $bp-medium) {
+		font-size: 50%;
+	}
 
-    @media only screen and (max-width: $bp-standard) {
-        font-size: 43.75%;
-    }
+	@media only screen and (max-width: $bp-standard) {
+		font-size: 43.75%;
+	}
 }
 
-.app {
-    font-family: "Nunito Sans", sans-serif;
-    font-weight: 400;
-    line-height: 1.6;
-    color: $color-grey-dark-1;
-    min-height: calc(100vh - 2 * 4vw);
+.root {
+	font-family: "Nunito Sans", sans-serif;
+	font-weight: 400;
+	line-height: 1.6;
+	color: $color-grey-dark-1;
+	min-height: calc(100vh - 2 * 4vw);
 
-    @media only screen and (max-width: $bp-small) {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+	@media only screen and (max-width: $bp-small) {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 }
 
 .container {
-    max-width: 120rem;
-    min-height: 117rem;
-    margin: 4vw auto;
-    background-color: #fff;
-    border-radius: 9px;
-    overflow: hidden;
-    box-shadow: 0 2rem 6rem 0.5rem rgba($color-grey-dark-1, 0.2);
+	max-width: 120rem;
+	min-height: 117rem;
+	margin: 4vw auto;
+	background-color: #fff;
+	border-radius: 9px;
+	overflow: hidden;
+	box-shadow: 0 2rem 6rem 0.5rem rgba($color-grey-dark-1, 0.2);
 
-    display: grid;
-    grid-template-rows: 10rem minmax(100rem, auto) 3rem;
-    grid-template-columns: 1fr 2fr;
-    grid-template-areas:
-        "head head"
-        "list recipe"
-        "footer footer";
+	display: grid;
+	grid-template-rows: 10rem minmax(100rem, auto) 3rem;
+	grid-template-columns: 1fr 2fr;
+	grid-template-areas:
+		"head head"
+		"list recipe"
+		"footer footer";
 
-    @media only screen and (max-width: $bp-large) {
-        max-width: 100%;
-        margin: 0;
-        border-radius: 0;
-    }
+	@media only screen and (max-width: $bp-large) {
+		max-width: 100%;
+		margin: 0;
+		border-radius: 0;
+	}
 
-    @media only screen and (max-width: $bp-standard) {
-        grid-template-columns: 1fr 1.25fr;
-    }
+	@media only screen and (max-width: $bp-standard) {
+		grid-template-columns: 1fr 1.25fr;
+	}
 
-    @media only screen and (max-width: $bp-small) {
-        min-height: 0;
-    }
+	@media only screen and (max-width: $bp-small) {
+		min-height: 0;
+	}
 
-    @media only screen and (max-width: $bp-smallest) {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        grid-template-areas:
-            "head"
-            "list"
-            "recipe"
-            "footer";
-    }
+	@media only screen and (max-width: $bp-smallest) {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto;
+		grid-template-areas:
+			"head"
+			"list"
+			"recipe"
+			"footer";
+	}
 }

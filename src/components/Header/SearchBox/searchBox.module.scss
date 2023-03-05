@@ -1,0 +1,65 @@
+@import "styles/variables.scss";
+@import "styles/components.scss";
+
+.root {
+	background-color: #fff;
+	border-radius: 10rem;
+	display: flex;
+	align-items: center;
+	padding-left: 3rem;
+	transition: all 0.3s;
+
+	&:focus-within {
+		transform: translateY(-2px);
+		box-shadow: 0 0.7rem 3rem rgba($color-grey-dark-1, 0.08);
+	}
+
+	@media only screen and (max-width: $bp-smallest) {
+		grid-area: search;
+		padding-left: 1rem;
+	}
+}
+
+.searchBtn {
+	font-weight: 600;
+	font-family: inherit;
+
+	&:active {
+		transform: translateY(1px);
+	}
+
+	span {
+		@media only screen and (max-width: $bp-smallest) {
+			display: none;
+		}
+	}
+}
+
+.input {
+	border: none;
+	background: none;
+	font-family: inherit;
+	color: inherit;
+	font-size: 1.7rem;
+	width: 30rem;
+
+	&:focus {
+		outline: none;
+	}
+
+	&::placeholder {
+		color: $color-grey-light-3;
+	}
+
+	@media only screen and (max-width: $bp-medium) {
+		width: auto;
+
+		&::placeholder {
+			color: white;
+		}
+	}
+
+	@media only screen and (max-width: $bp-smallest) {
+		width: 100%;
+	}
+}
