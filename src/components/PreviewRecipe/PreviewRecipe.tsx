@@ -1,16 +1,16 @@
 import cx from "classnames";
 
-import type { PreviewMeal } from "types/generalTypes";
+import type { PreviewRecipeType } from "types";
 
-import s from "./resultsPreview.module.scss";
+import s from "./previewRecipe.module.scss";
 
-type ResultsPreviewProps = {
-	meal: PreviewMeal;
+type PreviewRecipeProps = {
+	meal: PreviewRecipeType;
 	onClick?: () => void;
 	activeElement?: string | null;
 };
 
-const ResultsPreview = ({ meal, onClick, activeElement }: ResultsPreviewProps) => {
+const PreviewRecipe = ({ meal, onClick, activeElement }: PreviewRecipeProps) => {
 	return (
 		<li key={meal.id} className={s.root} onClick={onClick}>
 			<div className={cx(s.link, activeElement === meal.id && s.activeLink)}>
@@ -26,4 +26,4 @@ const ResultsPreview = ({ meal, onClick, activeElement }: ResultsPreviewProps) =
 	);
 };
 
-export { ResultsPreview };
+export { PreviewRecipe };

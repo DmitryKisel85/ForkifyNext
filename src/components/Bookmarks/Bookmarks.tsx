@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "hooks/typedHooks";
 import { bookmarksSelector } from "store/bookmarks/bookmarksSelector";
 import { getRecipeId } from "store/recipe/recipeSlice";
 
-import { ResultsPreview } from "components/ResultsPreview";
+import { PreviewRecipe } from "components/PreviewRecipe";
 
 import s from "./bookmarks.module.scss";
 
@@ -25,7 +25,7 @@ const Bookmarks = ({ isOverListHandle }: BookmarksProps) => {
 					<ul className={s.list}>
 						{bookmarks.map((bookmark) => {
 							return (
-								<ResultsPreview
+								<PreviewRecipe
 									key={bookmark.id}
 									meal={bookmark}
 									onClick={() => dispatch(getRecipeId(bookmark.id))}

@@ -31,20 +31,20 @@ type RecipeElementProps = {
 
 const RecipeElement = ({ id }: RecipeElementProps) => {
 	const bookmarks = useAppSelector(bookmarksSelector);
+	const dispatch = useAppDispatch();
 
 	const { data, isLoading, error, isSuccess } = useGetSingleRecipeQuery(id);
-	const dispatch = useAppDispatch();
 
 	const [servingsNumber, setServingsNumber] = useState(0);
 	const [isBookmarked, setIsBookmarked] = useState(false);
 
 	useEffect(() => {
 		if (data) {
-			setServingsNumber(data.data.recipe.servings);
+			setServingsNumber(data.servings);
 		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [data?.data.recipe.servings, id]);
+	}, [data?.servings, id]);
 
 	useEffect(() => {
 		if (bookmarks.some((bookmark) => bookmark.id === id)) {
@@ -84,7 +84,7 @@ const RecipeElement = ({ id }: RecipeElementProps) => {
 		}
 	}
 
-	const { title, image_url, cooking_time, servings, ingredients, publisher, source_url } = data.data.recipe;
+	const { title, image_url, cooking_time, servings, ingredients, publisher, source_url } = data;
 
 	const handleIncreaseServings = () => {
 		setServingsNumber((servingsNumber) => servingsNumber + 1);
@@ -100,7 +100,7 @@ const RecipeElement = ({ id }: RecipeElementProps) => {
 			dispatch(removeBookmarkFromStore(id));
 			setIsBookmarked(false);
 		} else {
-			dispatch(pushBookmarkToStore(data.data.recipe));
+			dispatch(pushBookmarkToStore(data));
 			setIsBookmarked(true);
 		}
 	};

@@ -6,7 +6,7 @@ import { FaFileUpload, FaRegThumbsUp, FaRegTimesCircle } from "react-icons/fa";
 
 import { useAddRecipeMutation } from "services/ForkifyServices";
 
-import type { RecipeFromForm } from "types/generalTypes";
+import type { RecipeFromForm } from "types";
 
 import { Spinner } from "components/Spinner";
 import { RenderMessage } from "components/RenderMessage";

@@ -9,7 +9,7 @@ import { searchTermSelector } from "store/search/searchSelector";
 import { useAppSelector, useAppDispatch } from "hooks/typedHooks";
 import { useViewport } from "hooks/useViewport";
 
-import { ResultsPreview } from "components/ResultsPreview";
+import { PreviewRecipe } from "components/PreviewRecipe";
 import { Pagination } from "components/SearchResults/Pagination";
 import { Spinner } from "components/Spinner";
 import { RenderMessage } from "components/RenderMessage";
@@ -17,34 +17,28 @@ import { RenderMessage } from "components/RenderMessage";
 import s from "./searchResults.module.scss";
 
 const SearchResults = () => {
-	const [currentPage, setCurrentPage] = useState<number>(1);
+	const [currentPage, setCurrentPage] = useState(1);
 	const [activeElement, setActiveElement] = useState<string | null>(null);
+
 	const searchTerm = useAppSelector(searchTermSelector);
+	const dispatch = useAppDispatch();
 
 	const { width } = useViewport();
 
-	// setting pagesize for pagination
-	let PageSize = width < 450 ? 6 : 10;
+	const { data, isLoading, error } = useGetRecipesQuery(searchTerm, {
+		skip: searchTerm.length === 0,
+	});
 
-	const dispatch = useAppDispatch();
-
-	const { data, isLoading, error } = useGetRecipesQuery(searchTerm);
-
-	const result = data?.data.recipes;
-	const lengthTotal = result?.length;
-
-	const updateActiveElement = (id: string) => {
-		setActiveElement(id);
-		dispatch(getRecipeId(id));
-	};
+	//setting pageSize for pagination
+	let pageSize = width < 450 ? 6 : 10;
 
 	const currentTableData = useMemo(() => {
-		const firstPageIndex = (currentPage - 1) * PageSize;
-		const lastPageIndex = firstPageIndex + PageSize;
-		return result?.slice(firstPageIndex, lastPageIndex);
-	}, [currentPage, result, PageSize]);
+		const firstPageIndex = (currentPage - 1) * pageSize;
+		const lastPageIndex = firstPageIndex + pageSize;
+		return data?.slice(firstPageIndex, lastPageIndex);
+	}, [currentPage, data, pageSize]);
 
-	if (data?.results === 0) {
+	if (data && data.length === 0) {
 		return (
 			<RenderMessage
 				messageText={`No results were found. Please, try another query!`}
@@ -52,37 +46,38 @@ const SearchResults = () => {
 			/>
 		);
 	}
-	if (!searchTerm) return <div></div>;
 	if (isLoading) return <Spinner />;
 	if (error) {
-		if ("status" in error) {
-			// you can access all properties of `FetchBaseQueryError` here
-			const errMsg = "error" in error ? error.error : JSON.stringify(error.data);
+		let errMsg = "";
 
-			return (
-				<RenderMessage
-					messageText={`Something goes wrong! ${errMsg}. Please, try again!`}
-					messageIcon={<FaRegTimesCircle />}
-				/>
-			);
+		if ("status" in error) {
+			errMsg = "error" in error ? error.error : JSON.stringify(error.data);
 		} else {
-			// you can access all properties of `SerializedError` here
-			return (
-				<RenderMessage
-					messageText={`Something goes wrong! ${error.message}. Please, try again!`}
-					messageIcon={<FaRegTimesCircle />}
-				/>
-			);
+			if (error && typeof error.message === "string") {
+				errMsg = error.message;
+			}
 		}
+
+		return (
+			<RenderMessage
+				messageText={`Something goes wrong! ${errMsg}. Please, try again!`}
+				messageIcon={<FaRegTimesCircle />}
+			/>
+		);
 	}
+
+	const updateActiveElement = (id: string) => {
+		setActiveElement(id);
+		dispatch(getRecipeId(id));
+	};
 
 	return (
 		<div className={s.root}>
-			{data && data.results > 0 && (
+			{data && data.length > 0 && (
 				<ul className={s.list}>
 					{currentTableData?.map((meal) => {
 						return (
-							<ResultsPreview
+							<PreviewRecipe
 								key={meal.id}
 								meal={meal}
 								onClick={() => updateActiveElement(meal.id)}
@@ -95,8 +90,8 @@ const SearchResults = () => {
 
 			<Pagination
 				currentPage={currentPage}
-				totalCount={lengthTotal || 0}
-				pageSize={PageSize}
+				totalCount={data?.length || 0}
+				pageSize={pageSize}
 				onPageChange={(page) => setCurrentPage(page)}
 			/>
 		</div>

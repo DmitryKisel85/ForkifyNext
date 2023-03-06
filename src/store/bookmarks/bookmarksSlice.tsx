@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import type { Recipe } from "types/generalTypes";
+import type { RecipeType } from "types";
 
 export type BookmarksState = {
-	bookmarks: Recipe[];
+	bookmarks: RecipeType[];
 };
 
 const initialState: BookmarksState = {
@@ -14,7 +14,7 @@ const bookmarksSlice = createSlice({
 	name: "bookmarksReducer",
 	initialState,
 	reducers: {
-		pushBookmarkToStore: (state, action: PayloadAction<Recipe>) => {
+		pushBookmarkToStore: (state, action: PayloadAction<RecipeType>) => {
 			state.bookmarks.push(action.payload);
 		},
 		removeBookmarkFromStore: (state, action: PayloadAction<string>) => {
