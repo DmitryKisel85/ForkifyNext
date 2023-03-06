@@ -10,7 +10,7 @@ import { useAppSelector, useAppDispatch } from "hooks/typedHooks";
 import { useViewport } from "hooks/useViewport";
 
 import { ResultsPreview } from "components/ResultsPreview";
-import { Pagination } from "components/Pagination";
+import { Pagination } from "components/SearchResults/Pagination";
 import { Spinner } from "components/Spinner";
 import { RenderMessage } from "components/RenderMessage";
 

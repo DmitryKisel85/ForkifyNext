@@ -1,4 +1,4 @@
-import classnames from "classnames";
+import cx from "classnames";
 import { usePagination, DOTS } from "hooks/usePagination";
 
 import s from "./pagination.module.scss";
@@ -35,15 +35,15 @@ const Pagination = (props: PaginationProps) => {
 	};
 
 	let lastPage = paginationRange && paginationRange[paginationRange.length - 1];
+
 	return (
-		<ul className={s.paginationContainer}>
-			{/* Left navigation arrow */}
+		<ul className={s.root}>
 			<li
-				className={classnames(s.paginationItem, {
-					[s.paginationItemDisabled]: currentPage === 1,
+				className={cx(s.item, {
+					[s.itemDisabled]: currentPage === 1,
 				})}
 				onClick={onPrevious}>
-				<div className={classnames(s.arrow, s.arrowLeft)} />
+				<div className={cx(s.arrow, s.arrowLeft)} />
 			</li>
 			{paginationRange &&
 				// eslint-disable-next-line array-callback-return
@@ -51,7 +51,7 @@ const Pagination = (props: PaginationProps) => {
 					// If the pageItem is a DOT, render the DOTS unicode character
 					if (pageNumber === DOTS) {
 						return (
-							<li key={index} className={s.paginationItemDots}>
+							<li key={index} className={s.dots}>
 								&#8230;
 							</li>
 						);
@@ -60,8 +60,8 @@ const Pagination = (props: PaginationProps) => {
 						return (
 							<li
 								key={index}
-								className={classnames(s.paginationItem, {
-									[s.paginationItemSelected]: pageNumber === currentPage,
+								className={cx(s.item, {
+									[s.itemSelected]: pageNumber === currentPage,
 								})}
 								onClick={() => onPageChange(pageNumber)}>
 								{pageNumber}
@@ -69,16 +69,13 @@ const Pagination = (props: PaginationProps) => {
 						);
 					}
 					return null;
-
-					// Render our Page Pills
 				})}
-			{/*  Right Navigation arrow */}
 			<li
-				className={classnames(s.paginationItem, {
-					[s.paginationItemDisabled]: currentPage === lastPage,
+				className={cx(s.item, {
+					[s.itemDisabled]: currentPage === lastPage,
 				})}
 				onClick={onNext}>
-				<div className={classnames(s.arrow, s.arrowRight)} />
+				<div className={cx(s.arrow, s.arrowRight)} />
 			</li>
 		</ul>
 	);
