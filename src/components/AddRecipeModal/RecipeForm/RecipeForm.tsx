@@ -27,25 +27,21 @@ const RecipeForm = () => {
 
 	if (isLoading) return <Spinner />;
 	if (error) {
-		if ("status" in error) {
-			// you can access all properties of `FetchBaseQueryError` here
-			const errMsg = "error" in error ? error.error : JSON.stringify(error.data);
+		let errMsg = "";
 
-			return (
-				<RenderMessage
-					messageText={`Something goes wrong! ${errMsg}. Please, try again!`}
-					messageIcon={<FaRegTimesCircle />}
-				/>
-			);
+		if ("status" in error) {
+			errMsg = "error" in error ? error.error : JSON.stringify(error.data);
 		} else {
-			// you can access all properties of `SerializedError` here
-			return (
-				<RenderMessage
-					messageText={`Something goes wrong! ${error.message}. Please, try again!`}
-					messageIcon={<FaRegTimesCircle />}
-				/>
-			);
+			if (error.message) {
+				errMsg = error.message;
+			}
 		}
+		return (
+			<RenderMessage
+				messageText={`Something goes wrong! ${errMsg}. Please, try again!`}
+				messageIcon={<FaRegTimesCircle />}
+			/>
+		);
 	}
 
 	if (isSuccess) return <RenderMessage messageText='Uploading successful!' messageIcon={<FaRegThumbsUp />} />;

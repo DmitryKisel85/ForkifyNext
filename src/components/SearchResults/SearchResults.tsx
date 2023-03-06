@@ -25,7 +25,7 @@ const SearchResults = () => {
 
 	const { width } = useViewport();
 
-	const { data, isLoading, error } = useGetRecipesQuery(searchTerm, {
+	const { data, isLoading, isFetching, error } = useGetRecipesQuery(searchTerm, {
 		skip: searchTerm.length === 0,
 	});
 
@@ -46,18 +46,17 @@ const SearchResults = () => {
 			/>
 		);
 	}
-	if (isLoading) return <Spinner />;
+	if (isLoading || isFetching) return <Spinner />;
 	if (error) {
 		let errMsg = "";
 
 		if ("status" in error) {
 			errMsg = "error" in error ? error.error : JSON.stringify(error.data);
 		} else {
-			if (error && typeof error.message === "string") {
+			if (error.message) {
 				errMsg = error.message;
 			}
 		}
-
 		return (
 			<RenderMessage
 				messageText={`Something goes wrong! ${errMsg}. Please, try again!`}
