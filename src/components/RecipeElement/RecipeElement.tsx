@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import cx from "classnames";
 import fracty from "fracty";
 import {
 	FaClock,
@@ -124,7 +123,7 @@ const RecipeElement = ({ id }: RecipeElementProps) => {
 							</div>
 						</div>
 
-						<button className={cx(s.btnRound, s.btnBookmark)} onClick={handleBookmarks}>
+						<button className={s.btnRound} onClick={handleBookmarks}>
 							{isBookmarked ? <FaBookmark /> : <FaRegBookmark />}
 						</button>
 					</div>

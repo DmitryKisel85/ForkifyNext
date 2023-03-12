@@ -10,14 +10,14 @@ type PreviewRecipeProps = {
 	isActive?: boolean;
 };
 
-const PreviewRecipe = ({ recipe: { id, image_url, title, publisher }, onClick, isActive }: PreviewRecipeProps) => {
+const PreviewRecipe = ({ recipe: { image_url, title, publisher }, onClick, isActive }: PreviewRecipeProps) => {
 	return (
 		<li className={s.root} onClick={onClick}>
 			<div className={cx(s.link, isActive && s.activeLink)}>
 				<figure className={s.figure}>
 					<img src={image_url} alt={title} />
 				</figure>
-				<div className={s.box}>
+				<div>
 					<h4 className={s.title}>{title}</h4>
 					<p className={s.text}>{publisher}</p>
 				</div>
