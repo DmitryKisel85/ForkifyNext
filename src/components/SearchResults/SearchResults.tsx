@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { FaRegTimesCircle } from "react-icons/fa";
 
-import { useGetRecipesQuery } from "services/ForkifyServices";
+import { useGetRecipesQuery } from "services/api";
 
 import { getRecipeId } from "store/recipe/recipeSlice";
 import { searchTermSelector } from "store/search/searchSelector";
@@ -19,6 +19,8 @@ import s from "./searchResults.module.scss";
 const SearchResults = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [activeElement, setActiveElement] = useState<string | null>(null);
+
+	console.log({ activeElement });
 
 	const searchTerm = useAppSelector(searchTermSelector);
 	const dispatch = useAppDispatch();

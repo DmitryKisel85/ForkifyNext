@@ -47,7 +47,7 @@ const AddRecipeModal = ({ isOpenModal, setIsOpenModal }: ModalProps) => {
 						<button className={s.btn} onClick={handleCloseModal}>
 							&times;
 						</button>
-						<RecipeForm />
+						<RecipeForm handleCloseModal={handleCloseModal} />
 					</motion.div>
 				</motion.div>
 			)}

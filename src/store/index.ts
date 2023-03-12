@@ -8,7 +8,7 @@ import recipeReducer from "store/recipe/recipeSlice";
 import bookmarksReducer from "store/bookmarks/bookmarksSlice";
 import viewportReducer from "store/viewport/viewportSlice";
 
-import { forkifyApi } from "services/ForkifyServices";
+import { forkifyApi } from "services/api";
 
 const rootReducer = combineReducers({
 	[forkifyApi.reducerPath]: forkifyApi.reducer,

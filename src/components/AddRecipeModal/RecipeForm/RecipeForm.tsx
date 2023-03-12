@@ -4,28 +4,38 @@ import { v4 as uuidv4 } from "uuid";
 
 import { FaFileUpload, FaRegThumbsUp, FaRegTimesCircle } from "react-icons/fa";
 
-import { useAddRecipeMutation } from "services/ForkifyServices";
+import { useAddRecipeMutation } from "services/api";
 
-import type { RecipeFromForm } from "types";
+import type { FormRecipeType, RecipeType } from "types";
 
 import { Spinner } from "components/Spinner";
 import { RenderMessage } from "components/RenderMessage";
 
 import s from "./recipeForm.module.scss";
 
-const RecipeForm = () => {
+type RecipeFormProps = {
+	handleCloseModal: () => void;
+};
+
+const RecipeForm = ({ handleCloseModal }: RecipeFormProps) => {
 	const {
 		register,
 		handleSubmit,
 		reset,
 		formState: { errors },
-	} = useForm<RecipeFromForm>({
+	} = useForm<FormRecipeType>({
 		mode: "onSubmit",
 	});
 
 	const [addRecipe, { error, isLoading, isSuccess }] = useAddRecipeMutation();
 
 	if (isLoading) return <Spinner />;
+	if (isSuccess) {
+		setTimeout(() => {
+			handleCloseModal();
+		}, 2000);
+		return <RenderMessage messageText='Uploading successful!' messageIcon={<FaRegThumbsUp />} />;
+	}
 	if (error) {
 		let errMsg = "";
 
@@ -44,29 +54,27 @@ const RecipeForm = () => {
 		);
 	}
 
-	if (isSuccess) return <RenderMessage messageText='Uploading successful!' messageIcon={<FaRegThumbsUp />} />;
-
-	const handleAddRecipe = async (body: any) => {
+	const handleAddRecipe = async (body: RecipeType) => {
 		await addRecipe(body).unwrap();
 	};
 
-	const onSubmit: SubmitHandler<RecipeFromForm> = (data) => {
-		const { ingredients } = data;
+	const onSubmit: SubmitHandler<FormRecipeType> = (formData) => {
+		const { ingredients, servings } = formData;
 
 		const newIngredients = ingredients
 			.filter((ingredient) => ingredient !== "")
-			.map((ing) => {
-				const ingArr = ing.split(",").map((el) => el.trim());
-				const [quantity, unit, description] = ingArr;
-				return { quantity: quantity ? +quantity : null, unit, description };
+			.map((ingredient) => {
+				const [quantity, unit, description] = ingredient.split(",").map((el) => el.trim());
+				return { quantity: quantity ? Number(quantity) : null, unit, description };
 			});
 
-		const newData = {
-			...data,
+		const recipe = {
+			...formData,
 			ingredients: newIngredients,
+			servings: Number(servings),
 		};
 
-		handleAddRecipe(newData);
+		handleAddRecipe(recipe);
 		reset();
 	};
 

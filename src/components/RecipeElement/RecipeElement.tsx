@@ -16,7 +16,7 @@ import {
 import { bookmarksSelector } from "store/bookmarks/bookmarksSelector";
 import { pushBookmarkToStore, removeBookmarkFromStore } from "store/bookmarks/bookmarksSlice";
 
-import { useGetSingleRecipeQuery } from "services/ForkifyServices";
+import { useGetSingleRecipeQuery } from "services/api";
 
 import { useAppDispatch, useAppSelector } from "hooks/typedHooks";
 
