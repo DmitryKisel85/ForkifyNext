@@ -44,6 +44,7 @@ export const forkifyApi = createApi({
 				},
 			}),
 			transformResponse: (response: SingleRecipe) => response.data.recipe,
+			providesTags: ["Recipes"],
 		}),
 		addRecipe: builder.mutation({
 			query: (body) => ({

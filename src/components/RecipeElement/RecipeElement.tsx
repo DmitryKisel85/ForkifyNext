@@ -156,7 +156,7 @@ const RecipeElement = ({ id }: RecipeElementProps) => {
 							<span className={s.recipePublisher}> {publisher}</span>. Please check out directions at
 							their website.
 						</p>
-						<a className={cx(s.btnSmall, s.recipeBtn)} href={source_url} target='_blank' rel='noreferrer'>
+						<a className={s.btnSmall} href={source_url} target='_blank' rel='noreferrer'>
 							<span>Directions</span>
 							<FaArrowRight />
 						</a>

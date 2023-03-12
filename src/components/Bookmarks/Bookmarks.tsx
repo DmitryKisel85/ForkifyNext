@@ -5,6 +5,7 @@ import { getRecipeId } from "store/recipe/recipeSlice";
 import { PreviewRecipe } from "components/PreviewRecipe";
 
 import s from "./bookmarks.module.scss";
+import { useCallback } from "react";
 
 type BookmarksProps = {
 	isOverListHandle: (boolean: boolean) => void;
@@ -15,6 +16,13 @@ const Bookmarks = ({ isOverListHandle }: BookmarksProps) => {
 
 	const dispatch = useAppDispatch();
 
+	const handlePreviewRecipe = useCallback(
+		(id: string) => {
+			dispatch(getRecipeId(id));
+		},
+		[dispatch]
+	);
+
 	return (
 		<>
 			{bookmarks && bookmarks.length > 0 ? (
@@ -23,12 +31,12 @@ const Bookmarks = ({ isOverListHandle }: BookmarksProps) => {
 					onMouseEnter={() => isOverListHandle(true)}
 					onMouseLeave={() => isOverListHandle(false)}>
 					<ul className={s.list}>
-						{bookmarks.map((bookmark) => {
+						{bookmarks.map((recipe) => {
 							return (
 								<PreviewRecipe
-									key={bookmark.id}
-									recipe={bookmark}
-									onClick={() => dispatch(getRecipeId(bookmark.id))}
+									key={recipe.id}
+									recipe={recipe}
+									onClick={() => handlePreviewRecipe(recipe.id)}
 								/>
 							);
 						})}

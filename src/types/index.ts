@@ -5,7 +5,7 @@ export type PreviewRecipeType = {
 	title: string;
 };
 
-export type Ingredient = {
+export type IngredientType = {
 	quantity: number | null;
 	unit: string;
 	description: string;
@@ -13,7 +13,7 @@ export type Ingredient = {
 
 export type RecipeType = {
 	publisher: string;
-	ingredients: Ingredient[];
+	ingredients: IngredientType[];
 	source_url: string;
 	image_url: string;
 	title: string;

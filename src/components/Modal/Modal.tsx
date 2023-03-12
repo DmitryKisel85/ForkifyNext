@@ -1,15 +1,15 @@
 import { motion } from "framer-motion";
 
-import { RecipeForm } from "components/AddRecipeModal/RecipeForm";
+import { RecipeForm } from "components/Modal/RecipeForm";
 
-import s from "./addRecipeModal.module.scss";
+import s from "./modal.module.scss";
 
 type ModalProps = {
 	isOpenModal: boolean;
 	setIsOpenModal: (value: boolean) => void;
 };
 
-const AddRecipeModal = ({ isOpenModal, setIsOpenModal }: ModalProps) => {
+const Modal = ({ isOpenModal, setIsOpenModal }: ModalProps) => {
 	const handleCloseModal = () => {
 		setIsOpenModal(false);
 	};
@@ -55,4 +55,4 @@ const AddRecipeModal = ({ isOpenModal, setIsOpenModal }: ModalProps) => {
 	);
 };
 
-export { AddRecipeModal };
+export { Modal };

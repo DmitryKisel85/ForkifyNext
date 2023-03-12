@@ -4,7 +4,7 @@ import { FaRegEdit, FaRegBookmark } from "react-icons/fa";
 
 import { useScrollLock } from "hooks/useScrollLock";
 
-import { AddRecipeModal } from "components/AddRecipeModal";
+import { Modal } from "components/Modal";
 import { Bookmarks } from "components/Bookmarks";
 
 import s from "./headerNavigation.module.scss";
@@ -16,7 +16,6 @@ const HeaderNavigation = () => {
 
 	const { lockScroll, unlockScroll } = useScrollLock();
 
-	// block scroll when modal is opened
 	useEffect(() => {
 		if (isOpenModal) {
 			lockScroll();
@@ -30,21 +29,22 @@ const HeaderNavigation = () => {
 		setIsOverList(boolean);
 	};
 
+	const handleAddRecipe = () => setIsOpenModal(true);
+	const handleOnMouseOver = () => setIsOverButton(true);
+	const handleOnMouseOut = () => setIsOverButton(false);
+
 	return (
 		<>
 			<nav className={s.root}>
 				<ul className={s.list}>
 					<li className={s.item}>
-						<button className={s.btn} onClick={() => setIsOpenModal(true)}>
+						<button className={s.btn} onClick={handleAddRecipe}>
 							<FaRegEdit />
 							<span>Add recipe</span>
 						</button>
 					</li>
 					<li className={s.item}>
-						<button
-							className={s.btn}
-							onMouseOver={() => setIsOverButton(true)}
-							onMouseOut={() => setIsOverButton(false)}>
+						<button className={s.btn} onMouseOver={handleOnMouseOver} onMouseOut={handleOnMouseOut}>
 							<FaRegBookmark />
 							<span>Bookmarks</span>
 						</button>
@@ -53,7 +53,7 @@ const HeaderNavigation = () => {
 				</ul>
 			</nav>
 			<AnimatePresence initial={false} mode='wait' onExitComplete={() => null}>
-				{isOpenModal && <AddRecipeModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />}
+				{isOpenModal && <Modal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />}
 			</AnimatePresence>
 		</>
 	);
