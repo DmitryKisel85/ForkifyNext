@@ -18,9 +18,7 @@ import s from "./searchResults.module.scss";
 
 const SearchResults = () => {
 	const [currentPage, setCurrentPage] = useState(1);
-	const [activeElement, setActiveElement] = useState<string | null>(null);
-
-	console.log({ activeElement });
+	const [activeRecipe, setActiveRecipe] = useState<string | null>(null);
 
 	const searchTerm = useAppSelector(searchTermSelector);
 	const dispatch = useAppDispatch();
@@ -67,8 +65,8 @@ const SearchResults = () => {
 		);
 	}
 
-	const updateActiveElement = (id: string) => {
-		setActiveElement(id);
+	const handleUpdateActiveRecipe = (id: string) => {
+		setActiveRecipe(id);
 		dispatch(getRecipeId(id));
 	};
 
@@ -76,13 +74,13 @@ const SearchResults = () => {
 		<div className={s.root}>
 			{data && data.length > 0 && (
 				<ul className={s.list}>
-					{currentTableData?.map((meal) => {
+					{currentTableData?.map((recipe) => {
 						return (
 							<PreviewRecipe
-								key={meal.id}
-								meal={meal}
-								onClick={() => updateActiveElement(meal.id)}
-								activeElement={activeElement}
+								key={recipe.id}
+								recipe={recipe}
+								onClick={() => handleUpdateActiveRecipe(recipe.id)}
+								isActive={recipe.id === activeRecipe}
 							/>
 						);
 					})}

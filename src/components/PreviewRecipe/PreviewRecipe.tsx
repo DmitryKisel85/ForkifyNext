@@ -5,21 +5,21 @@ import type { PreviewRecipeType } from "types";
 import s from "./previewRecipe.module.scss";
 
 type PreviewRecipeProps = {
-	meal: PreviewRecipeType;
+	recipe: PreviewRecipeType;
 	onClick?: () => void;
-	activeElement?: string | null;
+	isActive?: boolean;
 };
 
-const PreviewRecipe = ({ meal, onClick, activeElement }: PreviewRecipeProps) => {
+const PreviewRecipe = ({ recipe: { id, image_url, title, publisher }, onClick, isActive }: PreviewRecipeProps) => {
 	return (
-		<li key={meal.id} className={s.root} onClick={onClick}>
-			<div className={cx(s.link, activeElement === meal.id && s.activeLink)}>
+		<li className={s.root} onClick={onClick}>
+			<div className={cx(s.link, isActive && s.activeLink)}>
 				<figure className={s.figure}>
-					<img src={meal.image_url} alt={meal.title} />
+					<img src={image_url} alt={title} />
 				</figure>
 				<div className={s.box}>
-					<h4 className={s.title}>{meal.title}</h4>
-					<p className={s.author}>{meal.publisher}</p>
+					<h4 className={s.title}>{title}</h4>
+					<p className={s.text}>{publisher}</p>
 				</div>
 			</div>
 		</li>

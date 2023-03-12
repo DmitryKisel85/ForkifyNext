@@ -27,7 +27,7 @@ const Bookmarks = ({ isOverListHandle }: BookmarksProps) => {
 							return (
 								<PreviewRecipe
 									key={bookmark.id}
-									meal={bookmark}
+									recipe={bookmark}
 									onClick={() => dispatch(getRecipeId(bookmark.id))}
 								/>
 							);
