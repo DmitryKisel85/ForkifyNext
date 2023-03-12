@@ -8,8 +8,9 @@ import { useAddRecipeMutation } from "services/api";
 
 import { Spinner } from "components/Spinner";
 import { RenderMessage } from "components/RenderMessage";
+import { FormInput } from "components/Modal/RecipeForm/FormInput";
 
-import { fieldsData } from "./fieldsData";
+import { fieldsData, ingredientsFields } from "./fieldsData";
 
 import type { FormRecipeType, RecipeType } from "types";
 
@@ -82,52 +83,18 @@ const RecipeForm = ({ handleCloseModal }: RecipeFormProps) => {
 			<div className={s.box}>
 				<h3 className={s.header}>Recipe data</h3>
 
-				{fieldsData.map((field) => {
-					const { fieldname, label, placeholder, error, validationProp } = field;
+				{fieldsData.map((field) => (
+					<FormInput data={field} key={field.fieldname} register={register} errors={errors} />
+				))}
 
-					return (
-						<div className={s.group}>
-							<label className={s.label}>{label}</label>
-							<input
-								className={s.input}
-								placeholder={placeholder}
-								{...register(fieldname, validationProp)}
-							/>
-							{errors && errors[fieldname] && <p className={s.error}>{error}</p>}
-						</div>
-					);
-				})}
 				<input type='hidden' {...register("id")} value={uuidv4()} />
 			</div>
 
 			<div className={s.box}>
 				<h3 className={s.header}>Ingredients</h3>
-
-				{[...Array(6)].map((el, i) => {
-					const inputValidationProp =
-						i === 0
-							? {
-									...register("ingredients.0", {
-										minLength: 3,
-										required: true,
-									}),
-							  }
-							: null;
-
-					return (
-						<div key={i} className={s.group}>
-							<label className={s.label}>{`Ingredient ${i + 1}`}</label>
-							<input
-								className={s.input}
-								{...inputValidationProp}
-								placeholder="Format: 'Quantity,Unit,Description'"
-							/>
-							{i === 0 && errors?.ingredients && (
-								<p className={s.error}>Please, enter at least one ingredient'</p>
-							)}
-						</div>
-					);
-				})}
+				{ingredientsFields.map((field, idx) => (
+					<FormInput data={field} key={field.label} register={register} errors={errors} idx={idx} />
+				))}
 			</div>
 			<button type='submit' className={cx(s.btn, s.uploadBtn)}>
 				<FaFileUpload />

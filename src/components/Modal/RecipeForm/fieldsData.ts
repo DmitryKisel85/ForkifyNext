@@ -1,9 +1,9 @@
-type FieldDataType = {
-	fieldname: "title" | "source_url" | "image_url" | "publisher" | "cooking_time" | "servings";
+export type FieldDataType = {
+	fieldname: "title" | "source_url" | "image_url" | "publisher" | "cooking_time" | "servings" | "ingredients";
 	label: string;
 	placeholder: string;
-	error: string;
-	validationProp: {
+	error?: string;
+	validationProp?: {
 		required?: boolean;
 		pattern?: RegExp;
 		minLength?: number;
@@ -64,5 +64,40 @@ export const fieldsData: FieldDataType[] = [
 		placeholder: "4",
 		error: "Please, enter the number of servings",
 		validationProp: { required: true },
+	},
+];
+
+export const ingredientsFields: FieldDataType[] = [
+	{
+		fieldname: "ingredients",
+		label: "Ingredient 1",
+		placeholder: "Format: 'Quantity,Unit,Description'",
+		validationProp: { minLength: 3, required: true },
+		error: "Please, enter at least one ingredient",
+	},
+	{
+		fieldname: "ingredients",
+		label: "Ingredient 2",
+		placeholder: "Format: 'Quantity,Unit,Description'",
+	},
+	{
+		fieldname: "ingredients",
+		label: "Ingredient 3",
+		placeholder: "Format: 'Quantity,Unit,Description'",
+	},
+	{
+		fieldname: "ingredients",
+		label: "Ingredient 4",
+		placeholder: "Format: 'Quantity,Unit,Description'",
+	},
+	{
+		fieldname: "ingredients",
+		label: "Ingredient 5",
+		placeholder: "Format: 'Quantity,Unit,Description'",
+	},
+	{
+		fieldname: "ingredients",
+		label: "Ingredient 6",
+		placeholder: "Format: 'Quantity,Unit,Description'",
 	},
 ];
