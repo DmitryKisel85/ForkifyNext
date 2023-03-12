@@ -17,8 +17,8 @@ const Recipe = () => {
 				<RecipeElement id={chosenRecipeId} />
 			) : (
 				<RenderMessage
-					messageText='Start by searching for a recipe or an ingredient. Have fun!'
-					messageIcon={<FaRegSmileBeam />}
+					text='Start by searching for a recipe or an ingredient. Have fun!'
+					icon={<FaRegSmileBeam />}
 				/>
 			)}
 		</div>

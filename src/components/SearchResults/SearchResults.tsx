@@ -39,12 +39,7 @@ const SearchResults = () => {
 	}, [currentPage, data, pageSize]);
 
 	if (data && data.length === 0) {
-		return (
-			<RenderMessage
-				messageText={`No results were found. Please, try another query!`}
-				messageIcon={<FaRegTimesCircle />}
-			/>
-		);
+		return <RenderMessage text={`No results were found. Please, try another query!`} icon={<FaRegTimesCircle />} />;
 	}
 	if (isLoading || isFetching) return <Spinner />;
 	if (error) {
@@ -58,10 +53,7 @@ const SearchResults = () => {
 			}
 		}
 		return (
-			<RenderMessage
-				messageText={`Something goes wrong! ${errMsg}. Please, try again!`}
-				messageIcon={<FaRegTimesCircle />}
-			/>
+			<RenderMessage text={`Something goes wrong! ${errMsg}. Please, try again!`} icon={<FaRegTimesCircle />} />
 		);
 	}
 

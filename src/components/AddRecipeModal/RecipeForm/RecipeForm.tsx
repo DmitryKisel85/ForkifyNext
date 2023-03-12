@@ -34,7 +34,7 @@ const RecipeForm = ({ handleCloseModal }: RecipeFormProps) => {
 		setTimeout(() => {
 			handleCloseModal();
 		}, 2000);
-		return <RenderMessage messageText='Uploading successful!' messageIcon={<FaRegThumbsUp />} />;
+		return <RenderMessage text='Uploading successful!' icon={<FaRegThumbsUp />} />;
 	}
 	if (error) {
 		let errMsg = "";
@@ -47,10 +47,7 @@ const RecipeForm = ({ handleCloseModal }: RecipeFormProps) => {
 			}
 		}
 		return (
-			<RenderMessage
-				messageText={`Something goes wrong! ${errMsg}. Please, try again!`}
-				messageIcon={<FaRegTimesCircle />}
-			/>
+			<RenderMessage text={`Something goes wrong! ${errMsg}. Please, try again!`} icon={<FaRegTimesCircle />} />
 		);
 	}
 

@@ -1,15 +1,15 @@
 import s from "./renderMessage.module.scss";
 
 type RenderMessageProps = {
-	messageText: string;
-	messageIcon: React.ReactNode;
+	text: string;
+	icon: React.ReactNode;
 };
 
-const RenderMessage = ({ messageText, messageIcon }: RenderMessageProps) => {
+const RenderMessage = ({ text, icon }: RenderMessageProps) => {
 	return (
 		<div className={s.root}>
-			<div className={s.icon}>{messageIcon}</div>
-			<p className={s.text}>{messageText}</p>
+			<div className={s.icon}>{icon}</div>
+			<p className={s.text}>{text}</p>
 		</div>
 	);
 };

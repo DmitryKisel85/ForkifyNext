@@ -55,13 +55,7 @@ const RecipeElement = ({ id }: RecipeElementProps) => {
 	}, [id, bookmarks]);
 
 	if (isLoading || isFetching) return <Spinner />;
-	if (!data)
-		return (
-			<RenderMessage
-				messageText={`Something goes wrong! Please, try again!`}
-				messageIcon={<FaRegTimesCircle />}
-			/>
-		);
+	if (!data) return <RenderMessage text={`Something goes wrong! Please, try again!`} icon={<FaRegTimesCircle />} />;
 	if (error) {
 		let errMsg = "";
 
@@ -73,10 +67,7 @@ const RecipeElement = ({ id }: RecipeElementProps) => {
 			}
 		}
 		return (
-			<RenderMessage
-				messageText={`Something goes wrong! ${errMsg}. Please, try again!`}
-				messageIcon={<FaRegTimesCircle />}
-			/>
+			<RenderMessage text={`Something goes wrong! ${errMsg}. Please, try again!`} icon={<FaRegTimesCircle />} />
 		);
 	}
 
