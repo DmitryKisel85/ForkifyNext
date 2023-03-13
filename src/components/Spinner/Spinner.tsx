@@ -1,11 +1,13 @@
-import styles from "./spinner.module.scss";
+import { memo } from "react";
 
-const Spinner = () => {
+import s from "./spinner.module.scss";
+
+const Spinner = memo(() => {
 	return (
-		<div className={styles.spinnerOverlay}>
-			<div className={styles.spinnerContainer}></div>
+		<div className={s.root}>
+			<div className={s.container}></div>
 		</div>
 	);
-};
+});
 
-export default Spinner;
+export { Spinner };

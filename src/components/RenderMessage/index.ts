@@ -1,2 +1,1 @@
-import "./RenderMessage";
-export { default } from "./RenderMessage";
+export * from "./RenderMessage";

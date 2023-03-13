@@ -1,107 +1,92 @@
 import { useMemo, useState } from "react";
 import { FaRegTimesCircle } from "react-icons/fa";
 
-import { useGetRecipesQuery } from "../../services/ForkifyServices";
+import { useGetRecipesQuery } from "services/api";
 
-import { useAppSelector, useAppDispatch } from "../../hooks/typedHooks";
+import { getRecipeId } from "store/recipe/recipeSlice";
+import { searchTermSelector } from "store/search/searchSelector";
 
-import { getRecipeId } from "../../store/recipe/recipeSlice";
-import { searchTermSelector } from "../../store/search/searchSelector";
+import { useAppSelector, useAppDispatch } from "hooks/typedHooks";
+import { useViewport } from "hooks/useViewport";
 
-import useViewport from "../../hooks/useViewport";
+import { PreviewRecipe } from "components/PreviewRecipe";
+import { Pagination } from "components/SearchResults/Pagination";
+import { Spinner } from "components/Spinner";
+import { RenderMessage } from "components/RenderMessage";
 
-import ResultsPreviewElement from "../ResultsPreviewElement";
-import Pagination from "../Pagination";
-import Spinner from "../Spinner";
-import RenderMessage from "../RenderMessage";
-
-import styles from "./searchResults.module.scss";
+import s from "./searchResults.module.scss";
 
 const SearchResults = () => {
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const [activeElement, setActiveElement] = useState<string | null>(null);
-    const searchTerm = useAppSelector(searchTermSelector);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [activeRecipe, setActiveRecipe] = useState<string | null>(null);
 
-    const { width } = useViewport();
+	const searchTerm = useAppSelector(searchTermSelector);
+	const dispatch = useAppDispatch();
 
-    // setting pagesize for pagination
-    let PageSize = width < 450 ? 6 : 10;
+	const { width } = useViewport();
 
-    const dispatch = useAppDispatch();
+	const { data, isLoading, isFetching, error } = useGetRecipesQuery(searchTerm, {
+		skip: searchTerm.length === 0,
+	});
 
-    const { data, isLoading, error } = useGetRecipesQuery(searchTerm);
+	//setting pageSize for pagination
+	let pageSize = width < 450 ? 6 : 10;
 
-    const result = data?.data.recipes;
-    const lengthTotal = result?.length;
+	const currentTableData = useMemo(() => {
+		const firstPageIndex = (currentPage - 1) * pageSize;
+		const lastPageIndex = firstPageIndex + pageSize;
+		return data?.slice(firstPageIndex, lastPageIndex);
+	}, [currentPage, data, pageSize]);
 
-    const updateActiveElement = (id: string) => {
-        setActiveElement(id);
-        dispatch(getRecipeId(id));
-    };
+	if (data && data.length === 0) {
+		return <RenderMessage text={`No results were found. Please, try another query!`} icon={<FaRegTimesCircle />} />;
+	}
+	if (isLoading || isFetching) return <Spinner />;
+	if (error) {
+		let errMsg = "";
 
-    const currentTableData = useMemo(() => {
-        const firstPageIndex = (currentPage - 1) * PageSize;
-        const lastPageIndex = firstPageIndex + PageSize;
-        return result?.slice(firstPageIndex, lastPageIndex);
-    }, [currentPage, result, PageSize]);
+		if ("status" in error) {
+			errMsg = "error" in error ? error.error : JSON.stringify(error.data);
+		} else {
+			if (error.message) {
+				errMsg = error.message;
+			}
+		}
+		return (
+			<RenderMessage text={`Something goes wrong! ${errMsg}. Please, try again!`} icon={<FaRegTimesCircle />} />
+		);
+	}
 
-    if (data?.results === 0) {
-        return (
-            <RenderMessage
-                messageText={`No results were found. Please, try another query!`}
-                messageIcon={<FaRegTimesCircle />}
-            />
-        );
-    }
-    if (!searchTerm) return <div></div>;
-    if (isLoading) return <Spinner />;
-    if (error) {
-        if ("status" in error) {
-            // you can access all properties of `FetchBaseQueryError` here
-            const errMsg = "error" in error ? error.error : JSON.stringify(error.data);
+	const handleUpdateActiveRecipe = (id: string) => {
+		setActiveRecipe(id);
+		dispatch(getRecipeId(id));
+	};
 
-            return (
-                <RenderMessage
-                    messageText={`Something goes wrong! ${errMsg}. Please, try again!`}
-                    messageIcon={<FaRegTimesCircle />}
-                />
-            );
-        } else {
-            // you can access all properties of `SerializedError` here
-            return (
-                <RenderMessage
-                    messageText={`Something goes wrong! ${error.message}. Please, try again!`}
-                    messageIcon={<FaRegTimesCircle />}
-                />
-            );
-        }
-    }
+	return (
+		<div className={s.root}>
+			{data && data.length > 0 && (
+				<ul className={s.list}>
+					{currentTableData?.map((recipe) => {
+						return (
+							<PreviewRecipe
+								key={recipe.id}
+								recipe={recipe}
+								onClick={() => handleUpdateActiveRecipe(recipe.id)}
+								isActive={recipe.id === activeRecipe}
+							/>
+						);
+					})}
+				</ul>
+			)}
 
-    return (
-        <div className={styles.searchResults}>
-            {data && data.results > 0 && (
-                <ul className={styles.results}>
-                    {currentTableData?.map((meal) => {
-                        return (
-                            <ResultsPreviewElement
-                                key={meal.id}
-                                meal={meal}
-                                onClick={() => updateActiveElement(meal.id)}
-                                activeElement={activeElement}
-                            />
-                        );
-                    })}
-                </ul>
-            )}
-
-            <Pagination
-                currentPage={currentPage}
-                totalCount={lengthTotal || 0}
-                pageSize={PageSize}
-                onPageChange={(page) => setCurrentPage(page)}
-            />
-        </div>
-    );
+			<Pagination
+				currentPage={currentPage}
+				totalCount={data?.length || 0}
+				pageSize={pageSize}
+				onPageChange={(page) => setCurrentPage(page)}
+			/>
+		</div>
+	);
 };
 
-export default SearchResults;
+export { SearchResults };

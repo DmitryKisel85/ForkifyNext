@@ -1,28 +1,28 @@
 import { FaRegSmileBeam } from "react-icons/fa";
 
-import { recipeIdSelector } from "../../store/recipe/recipeSelector";
-import { useAppSelector } from "../../hooks/typedHooks";
+import { recipeIdSelector } from "store/recipe/recipeSelector";
+import { useAppSelector } from "hooks/typedHooks";
 
-import RecipeElement from "../RecipeElement";
-import RenderMessage from "../RenderMessage";
+import { RecipeElement } from "components/RecipeElement";
+import { RenderMessage } from "components/RenderMessage";
 
-import styles from "./recipe.module.scss";
+import s from "./recipe.module.scss";
 
 const Recipe = () => {
-    const chosenRecipeId = useAppSelector(recipeIdSelector);
+	const recipeId = useAppSelector(recipeIdSelector);
 
-    return (
-        <div className={styles.recipe}>
-            {chosenRecipeId ? (
-                <RecipeElement id={chosenRecipeId} />
-            ) : (
-                <RenderMessage
-                    messageText="Start by searching for a recipe or an ingredient. Have fun!"
-                    messageIcon={<FaRegSmileBeam />}
-                />
-            )}
-        </div>
-    );
+	return (
+		<div className={s.root}>
+			{recipeId ? (
+				<RecipeElement id={recipeId} />
+			) : (
+				<RenderMessage
+					text='Start by searching for a recipe or an ingredient. Have fun!'
+					icon={<FaRegSmileBeam />}
+				/>
+			)}
+		</div>
+	);
 };
 
-export default Recipe;
+export { Recipe };

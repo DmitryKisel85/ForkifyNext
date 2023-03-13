@@ -1,230 +1,150 @@
-@import "./variables.scss";
+@import "styles/variables.scss";
 
 %btn {
-    background-image: $gradient;
-    border-radius: 10rem;
-    border: none;
-    text-transform: uppercase;
-    color: #fff;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    transition: all 0.2s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: transform 0.3s;
+	border: none;
+	border-radius: 10rem;
+	background-image: $gradient;
+	color: $color-white;
+	text-transform: uppercase;
 
-    &:hover {
-        transform: scale(1.05);
-    }
+	&:hover {
+		transform: scale(1.05);
+	}
 
-    &:focus {
-        outline: none;
-    }
+	&:focus {
+		outline: none;
+	}
 
-    & > *:first-child {
-        margin-right: 1rem;
+	& > *:first-child {
+		margin-right: 1rem;
 
-        @media only screen and (max-width: $bp-smallest) {
-            margin-right: 0;
-        }
-    }
+		@media only screen and (max-width: $bp-smallest) {
+			margin-right: 0;
+		}
+	}
 }
 
 .btn {
-    @extend %btn;
+	@extend %btn;
 
-    padding: 1.5rem 4rem;
-    font-size: 1.5rem;
-    font-weight: 600;
+	padding: 1.5rem 4rem;
+	font-size: 1.5rem;
+	font-weight: 600;
 
-    @media only screen and (max-width: $bp-standard) {
-        padding: 1rem 2.25rem;
-        font-size: 1.25rem;
-    }
+	svg {
+		width: 2.25rem;
+		height: 2.25rem;
+		fill: currentColor;
+	}
 
-    svg {
-        height: 2.25rem;
-        width: 2.25rem;
-        fill: currentColor;
-    }
+	&:disabled {
+		background-color: $color-grey-dark-2;
+		background-image: none;
+	}
 
-    &:disabled {
-        background-image: none;
-        background-color: $color-grey-dark-2;
-    }
+	@media only screen and (max-width: $bp-standard) {
+		padding: 1rem 2.25rem;
+		font-size: 1.25rem;
+	}
 }
 
 .btnSmall {
-    &,
-    &:link,
-    &:visited {
-        @extend %btn;
+	@extend %btn;
 
-        font-size: 1.4rem;
-        font-weight: 600;
-        padding: 1.25rem 2.25rem;
-        text-decoration: none;
+	padding: 1.25rem 2.25rem;
+	font-size: 1.4rem;
+	font-weight: 600;
 
-        svg {
-            height: 1.75rem;
-            width: 1.75rem;
-            fill: currentColor;
-        }
-    }
+	svg {
+		width: 1.75rem;
+		height: 1.75rem;
+		fill: currentColor;
+	}
 }
 
-.btnInline {
-    color: $color-primary;
-    font-size: 1.3rem;
-    font-weight: 600;
-    border: none;
-    background-color: $color-grey-light-1;
-    padding: 0.8rem 1.2rem;
-    border-radius: 10rem;
-    cursor: pointer;
+// .btnInline {
+// 	display: flex;
+// 	align-items: center;
+// 	padding: 0.8rem 1.2rem;
+// 	cursor: pointer;
+// 	transition: all 0.2s;
+// 	border: none;
+// 	border-radius: 10rem;
+// 	background-color: $color-grey-light-1;
+// 	font-size: 1.3rem;
+// 	font-weight: 600;
+// 	color: $color-primary;
 
-    display: flex;
-    align-items: center;
-    transition: all 0.2s;
+// 	svg {
+// 		width: 1.6rem;
+// 		height: 1.6rem;
+// 		margin: 0 0.2rem;
+// 		fill: currentColor;
+// 	}
 
-    svg {
-        height: 1.6rem;
-        width: 1.6rem;
-        fill: currentColor;
-        margin: 0 0.2rem;
-    }
+// 	span {
+// 		margin: 0 0.4rem;
+// 	}
 
-    span {
-        margin: 0 0.4rem;
-    }
+// 	&:hover {
+// 		background-color: $color-grey-light-2;
+// 		color: $color-grad-2;
+// 	}
 
-    &:hover {
-        color: $color-grad-2;
-        background-color: $color-grey-light-2;
-    }
-
-    &:focus {
-        outline: none;
-    }
-}
+// 	&:focus {
+// 		outline: none;
+// 	}
+// }
 
 .btnRound {
-    background-image: $gradient;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    height: 4.5rem;
-    width: 4.5rem;
-    // margin-left: auto;
-    transition: all 0.2s;
+	@extend %btn;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: translateY(-3px);
+	width: 4.5rem;
+	height: 4.5rem;
+	border-radius: 50%;
 
-    &:hover {
-        transform: scale(1.07);
-    }
+	& > *:first-child {
+		margin-right: 0;
+	}
 
-    &:focus {
-        outline: none;
-    }
-
-    svg {
-        height: 2.5rem;
-        width: 2.5rem;
-        fill: #fff;
-    }
+	svg {
+		width: 2.5rem;
+		height: 2.5rem;
+		fill: $color-white;
+	}
 }
 
 .btnTiny {
-    height: 2.25rem;
-    width: 2.25rem;
-    border: none;
-    background: none;
-    cursor: pointer;
+	width: 2.25rem;
+	height: 2.25rem;
+	cursor: pointer;
+	border: none;
+	background: none;
+	outline: none;
 
-    svg {
-        height: 100%;
-        width: 100%;
-        fill: $color-primary;
-        transition: all 0.3s;
-    }
+	svg {
+		width: 100%;
+		height: 100%;
+		transition: transform 0.3s;
+		fill: $color-primary;
+	}
 
-    &:focus {
-        outline: none;
-    }
+	&:hover svg {
+		transform: translateY(-5px);
+		fill: $color-grad-2;
+	}
 
-    &:hover svg {
-        fill: $color-grad-2;
-        transform: translateY(-1px);
-    }
+	&:active svg {
+		transform: translateY(0);
+		fill: $color-grad-2;
+	}
 
-    &:active svg {
-        fill: $color-grad-2;
-        transform: translateY(0);
-    }
-
-    &:not(:last-child) {
-        margin-right: 0.3rem;
-    }
-}
-
-.heading2 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: $color-primary;
-    text-transform: uppercase;
-    margin-bottom: 2.5rem;
-    text-align: center;
-    // transform: skewY(-3deg);
-}
-
-.link:link,
-.link:visited {
-    color: $color-grey-dark-2;
-}
-
-.spinner {
-    margin: 5rem auto;
-    text-align: center;
-
-    svg {
-        height: 6rem;
-        width: 6rem;
-        fill: $color-primary;
-        animation: rotate 2s infinite linear;
-    }
-}
-
-@keyframes rotate {
-    0% {
-        transform: rotate(0);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-.message,
-.error {
-    max-width: 40rem;
-    margin: 0 auto;
-    padding: 5rem 4rem;
-
-    display: flex;
-
-    svg {
-        height: 3rem;
-        width: 3rem;
-        fill: $color-primary;
-        // transform: translateY(-0.3rem);
-    }
-
-    p {
-        margin-left: 1.5rem;
-        font-size: 1.8rem;
-        line-height: 1.5;
-        font-weight: 600;
-    }
+	&:not(:last-child) {
+		margin-right: 0.3rem;
+	}
 }

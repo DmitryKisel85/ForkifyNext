@@ -1,47 +1,50 @@
-import { useAppDispatch, useAppSelector } from "../../hooks/typedHooks";
-import { bookmarksSelector } from "../../store/bookmarks/bookmarksSelector";
-import { getRecipeId } from "../../store/recipe/recipeSlice";
+import { useAppDispatch, useAppSelector } from "hooks/typedHooks";
+import { bookmarksSelector } from "store/bookmarks/bookmarksSelector";
+import { getRecipeId } from "store/recipe/recipeSlice";
 
-import ResultsPreviewElement from "../ResultsPreviewElement";
+import { PreviewRecipe } from "components/PreviewRecipe";
 
-import styles from "./bookmarks.module.scss";
+import s from "./bookmarks.module.scss";
+import { useCallback } from "react";
 
 type BookmarksProps = {
-    isOverListHandle: (boolean: boolean) => void;
+	isOverListHandle: (boolean: boolean) => void;
 };
 
 const Bookmarks = ({ isOverListHandle }: BookmarksProps) => {
-    const bookmarks = useAppSelector(bookmarksSelector);
+	const bookmarks = useAppSelector(bookmarksSelector);
 
-    const dispatch = useAppDispatch();
+	const dispatch = useAppDispatch();
 
-    return (
-        <>
-            {bookmarks && bookmarks.length > 0 ? (
-                <div
-                    className={styles.bookmarks}
-                    onMouseEnter={() => isOverListHandle(true)}
-                    onMouseLeave={() => isOverListHandle(false)}
-                >
-                    <ul className={styles.bookmarksList}>
-                        {bookmarks.map((bookmark) => {
-                            return (
-                                <ResultsPreviewElement
-                                    key={bookmark.id}
-                                    meal={bookmark}
-                                    onClick={() =>
-                                        dispatch(getRecipeId(bookmark.id))
-                                    }
-                                />
-                            );
-                        })}
-                    </ul>
-                </div>
-            ) : (
-                ""
-            )}
-        </>
-    );
+	const handlePreviewRecipe = useCallback(
+		(id: string) => {
+			dispatch(getRecipeId(id));
+		},
+		[dispatch]
+	);
+
+	return (
+		<>
+			{bookmarks && bookmarks.length > 0 ? (
+				<div
+					className={s.root}
+					onMouseEnter={() => isOverListHandle(true)}
+					onMouseLeave={() => isOverListHandle(false)}>
+					<ul className={s.list}>
+						{bookmarks.map((recipe) => {
+							return (
+								<PreviewRecipe
+									key={recipe.id}
+									recipe={recipe}
+									onClick={() => handlePreviewRecipe(recipe.id)}
+								/>
+							);
+						})}
+					</ul>
+				</div>
+			) : null}
+		</>
+	);
 };
 
-export default Bookmarks;
+export { Bookmarks };

@@ -1,32 +1,32 @@
-@import "../../styles/variables.scss";
+@import "styles/variables.scss";
 
-.header {
-    grid-area: head;
-    background-color: $color-grey-light-1;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.root {
+	grid-area: head;
+	background-color: $color-grey-light-1;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 
-    @media only screen and (max-width: $bp-smallest) {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        grid-template-areas:
-            "logo search"
-            "button button";
-        padding: 2.25rem 1.25rem 1.25rem 1.25rem;
-        gap: 1.25rem;
-    }
+	@media only screen and (max-width: $bp-smallest) {
+		display: grid;
+		grid-template-columns: 1fr 2fr;
+		grid-template-areas:
+			"logo search"
+			"button button";
+		padding: 2.25rem 1.25rem 1.25rem 1.25rem;
+		gap: 1.25rem;
+	}
 }
 
-.headerLogo {
-    margin-left: 4rem;
-    height: 4.6rem;
-    display: block;
+.logo {
+	margin-left: 4rem;
+	height: 4.6rem;
+	display: block;
 
-    @media only screen and (max-width: $bp-smallest) {
-        grid-area: logo;
-        justify-self: start;
-        margin-left: 0;
-        height: 5rem;
-    }
+	@media only screen and (max-width: $bp-smallest) {
+		grid-area: logo;
+		justify-self: start;
+		margin-left: 0;
+		height: 5rem;
+	}
 }

@@ -1,11 +1,9 @@
 import { useAppSelector } from "./typedHooks";
-import { viewportSizesWidth, viewportSizesHeight } from "../store/viewport/viewportSelector";
+import { viewportSizesWidth, viewportSizesHeight } from "store/viewport/viewportSelector";
 
-const useViewport = () => {
-    const width = useAppSelector(viewportSizesWidth);
-    const height = useAppSelector(viewportSizesHeight);
+export const useViewport = () => {
+	const width = useAppSelector(viewportSizesWidth);
+	const height = useAppSelector(viewportSizesHeight);
 
-    return { width, height };
+	return { width, height };
 };
-
-export default useViewport;

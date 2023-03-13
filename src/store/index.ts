@@ -3,34 +3,34 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import searchReducer from "./search/searchSlice";
-import recipeReducer from "./recipe/recipeSlice";
-import bookmarksReducer from "./bookmarks/bookmarksSlice";
-import viewportReducer from "./viewport/viewportSlice";
+import searchReducer from "store/search/searchSlice";
+import recipeReducer from "store/recipe/recipeSlice";
+import bookmarksReducer from "store/bookmarks/bookmarksSlice";
+import viewportReducer from "store/viewport/viewportSlice";
 
-import { forkifyApi } from "../services/ForkifyServices";
+import { forkifyApi } from "services/api";
 
 const rootReducer = combineReducers({
-    [forkifyApi.reducerPath]: forkifyApi.reducer,
-    searchTerm: searchReducer,
-    recipeId: recipeReducer,
-    bookmarks: bookmarksReducer,
-    viewport: viewportReducer,
+	[forkifyApi.reducerPath]: forkifyApi.reducer,
+	searchTerm: searchReducer,
+	recipeId: recipeReducer,
+	bookmarks: bookmarksReducer,
+	viewport: viewportReducer,
 });
 
 const persistConfig = {
-    key: "root",
-    storage: storage,
+	key: "root",
+	storage: storage,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
-    reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: false,
-        }).concat(forkifyApi.middleware),
+	reducer: persistedReducer,
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			serializableCheck: false,
+		}).concat(forkifyApi.middleware),
 });
 
 export const persistor = persistStore(store);

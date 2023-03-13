@@ -1,0 +1,76 @@
+@import "styles/variables.scss";
+@import "styles/components.scss";
+
+.root {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 4rem 6rem;
+
+	@media only screen and (max-width: $bp-small) {
+		gap: 2rem 3rem;
+	}
+	@media only screen and (max-width: $bp-smallest) {
+		gap: 1rem 2rem;
+	}
+}
+
+.group {
+	position: relative;
+	padding-bottom: 2.5rem;
+}
+
+.input {
+	display: block;
+	width: 100%;
+	font-size: 1.5rem;
+	padding: 0.8rem 1rem;
+	border: 1px solid #ddd;
+	border-radius: 0.5rem;
+	transition: all 0.2s;
+
+	&::placeholder {
+		color: $color-grey-light-3;
+	}
+
+	&:focus {
+		outline: none;
+		border: 1px solid $color-primary;
+		background-color: $color-grey-light-1;
+	}
+}
+
+.error {
+	position: absolute;
+	bottom: 5%;
+	color: $color-primary;
+	font-size: 1.25rem;
+
+	@media only screen and (max-width: $bp-smallest) {
+		font-size: 1rem;
+		bottom: 10%;
+	}
+}
+
+.label {
+	font-size: 1.5rem;
+	font-weight: 600;
+	color: inherit;
+}
+
+.box {
+	display: flex;
+	flex-direction: column;
+}
+
+.header {
+	font-size: 2.25rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	margin-bottom: 1rem;
+	grid-column: 1/-1;
+}
+
+.btn {
+	grid-column: 1 / -1;
+	justify-self: center;
+}
