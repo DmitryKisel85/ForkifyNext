@@ -9,12 +9,12 @@ import { RenderMessage } from "components/RenderMessage";
 import s from "./recipe.module.scss";
 
 const Recipe = () => {
-	const chosenRecipeId = useAppSelector(recipeIdSelector);
+	const recipeId = useAppSelector(recipeIdSelector);
 
 	return (
 		<div className={s.root}>
-			{chosenRecipeId ? (
-				<RecipeElement id={chosenRecipeId} />
+			{recipeId ? (
+				<RecipeElement id={recipeId} />
 			) : (
 				<RenderMessage
 					text='Start by searching for a recipe or an ingredient. Have fun!'

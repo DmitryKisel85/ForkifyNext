@@ -41,9 +41,7 @@ const RecipeElement = ({ id }: RecipeElementProps) => {
 		if (data) {
 			setServingsNumber(data.servings);
 		}
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [data?.servings, id]);
+	}, [data, id]);
 
 	useEffect(() => {
 		if (bookmarks.some((bookmark) => bookmark.id === id)) {
@@ -72,11 +70,11 @@ const RecipeElement = ({ id }: RecipeElementProps) => {
 
 	const { title, image_url, cooking_time, servings, ingredients, publisher, source_url } = data;
 
-	const handleIncreaseServings = () => {
+	const handleIncServings = () => {
 		setServingsNumber((servingsNumber) => servingsNumber + 1);
 	};
 
-	const handleDecreaseServings = () => {
+	const handleDecServings = () => {
 		if (servingsNumber === 1) return;
 		setServingsNumber((servingsNumber) => servingsNumber - 1);
 	};
@@ -95,29 +93,29 @@ const RecipeElement = ({ id }: RecipeElementProps) => {
 		<>
 			{data && (
 				<>
-					<figure className={s.recipeFig}>
-						<img src={image_url} alt={title} className={s.recipeImg} />
-						<h1 className={s.recipeTitle}>
+					<figure className={s.header}>
+						<img src={image_url} alt={title} className={s.img} />
+						<h1 className={s.title}>
 							<span>{title}</span>
 						</h1>
 					</figure>
 
-					<div className={s.recipeDetails}>
-						<div className={s.recipeInfo}>
+					<div className={s.heroBox}>
+						<div className={s.wrapper}>
 							<FaClock />
-							<span className={s.recipeInfoData}>{cooking_time}</span>
-							<span className={s.recipeInfoText}>minutes</span>
+							<span className={s.data}>{cooking_time}</span>
+							<span>minutes</span>
 						</div>
-						<div className={s.recipeInfo}>
+						<div className={s.wrapper}>
 							<FaUserAlt />
-							<span className={s.recipeInfoData}>{servingsNumber}</span>
-							<span className={s.recipeInfoText}>servings</span>
+							<span className={s.data}>{servingsNumber}</span>
+							<span>servings</span>
 
-							<div className={s.recipeInfoButtons}>
-								<button className={s.btnTiny} onClick={handleDecreaseServings}>
+							<div className={s.btns}>
+								<button className={s.btnTiny} onClick={handleDecServings}>
 									<FaRegMinusSquare />
 								</button>
-								<button className={s.btnTiny} onClick={handleIncreaseServings}>
+								<button className={s.btnTiny} onClick={handleIncServings}>
 									<FaRegPlusSquare />
 								</button>
 							</div>
@@ -128,32 +126,29 @@ const RecipeElement = ({ id }: RecipeElementProps) => {
 						</button>
 					</div>
 
-					<div className={s.recipeIngredients}>
-						<h2 className={s.heading2}>Recipe ingredients</h2>
-						<ul className={s.recipeIngredientList}>
-							{ingredients.map((ingredient, index) => (
-								<li key={index} className={s.recipeIngredient}>
+					<div className={s.ingredientsBox}>
+						<h2 className={s.heading}>Recipe ingredients</h2>
+						<ul className={s.list}>
+							{ingredients.map(({ quantity, unit, description }, idx) => (
+								<li key={idx} className={s.item}>
 									<FaCaretRight />
-									<div className={s.recipeQuantity}>
-										{ingredient.quantity
-											? fracty((ingredient.quantity / servings) * servingsNumber).toString()
-											: ""}
+									<div className={s.quantity}>
+										{quantity ? fracty((quantity / servings) * servingsNumber).toString() : ""}
 									</div>
-									<div className={s.recipeDescription}>
-										<span className={s.recipeUnit}>{ingredient.unit} </span>
-										{ingredient.description}
+									<div>
+										<span>{unit} </span>
+										{description}
 									</div>
 								</li>
 							))}
 						</ul>
 					</div>
 
-					<div className={s.recipeDirections}>
-						<h2 className={s.heading2}>How to cook it</h2>
-						<p className={s.recipeDirectionsText}>
+					<div className={s.directionsBox}>
+						<h2 className={s.heading}>How to cook it</h2>
+						<p className={s.directionsText}>
 							This recipe was carefully designed and tested by
-							<span className={s.recipePublisher}> {publisher}</span>. Please check out directions at
-							their website.
+							<b> {publisher}</b>. Please check out directions at their website.
 						</p>
 						<a className={s.btnSmall} href={source_url} target='_blank' rel='noreferrer'>
 							<span>Directions</span>
