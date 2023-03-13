@@ -105,7 +105,7 @@ const RecipeForm = ({ handleCloseModal }: RecipeFormProps) => {
 			<div className={s.box}>
 				<h3 className={s.header}>Ingredients</h3>
 
-				{[...Array(6)].map((el, i) => {
+				{[...Array(6)].map((_, i) => {
 					const inputValidationProp =
 						i === 0
 							? {
