@@ -73,6 +73,8 @@ const RecipeForm = ({ handleCloseModal }: RecipeFormProps) => {
 			servings: Number(servings),
 		};
 
+		console.log({ recipe });
+
 		handleAddRecipe(recipe);
 		reset();
 	};
@@ -107,12 +109,14 @@ const RecipeForm = ({ handleCloseModal }: RecipeFormProps) => {
 					const inputValidationProp =
 						i === 0
 							? {
-									...register("ingredients.0", {
+									...register(`ingredients.${i}`, {
 										minLength: 3,
 										required: true,
 									}),
 							  }
-							: null;
+							: {
+									...register(`ingredients.${i}`),
+							  };
 
 					return (
 						<div key={i} className={s.group}>
