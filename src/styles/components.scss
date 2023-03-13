@@ -67,40 +67,6 @@
 	}
 }
 
-// .btnInline {
-// 	display: flex;
-// 	align-items: center;
-// 	padding: 0.8rem 1.2rem;
-// 	cursor: pointer;
-// 	transition: all 0.2s;
-// 	border: none;
-// 	border-radius: 10rem;
-// 	background-color: $color-grey-light-1;
-// 	font-size: 1.3rem;
-// 	font-weight: 600;
-// 	color: $color-primary;
-
-// 	svg {
-// 		width: 1.6rem;
-// 		height: 1.6rem;
-// 		margin: 0 0.2rem;
-// 		fill: currentColor;
-// 	}
-
-// 	span {
-// 		margin: 0 0.4rem;
-// 	}
-
-// 	&:hover {
-// 		background-color: $color-grey-light-2;
-// 		color: $color-grad-2;
-// 	}
-
-// 	&:focus {
-// 		outline: none;
-// 	}
-// }
-
 .btnRound {
 	@extend %btn;
 
